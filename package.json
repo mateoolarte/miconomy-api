@@ -18,6 +18,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "15.0.1"
+  },
   "dependencies": {
     "@prisma/cli": "^2.14.0",
     "@prisma/client": "^2.14.0",
