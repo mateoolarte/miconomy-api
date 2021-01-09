@@ -5,7 +5,11 @@
     "sourceMap": true,
     "strict": true,
     "lib": ["esnext"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2018",
+    "module": "commonjs",
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["prisma/**/*"]
 }
