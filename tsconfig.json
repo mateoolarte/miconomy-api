@@ -6,10 +6,6 @@
     "strict": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2018",
-    "module": "commonjs",
   },
   "include": ["src/**/*"],
-  "exclude": ["prisma/**/*"]
 }
