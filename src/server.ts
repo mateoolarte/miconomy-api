@@ -2,9 +2,13 @@ import { ApolloServer } from "apollo-server";
 import { schema } from "./schema";
 import { createContext } from "./context";
 
-const PORT = process.env.PORT || 4000;
+// const PORT = process.env.PORT || 4000;
+const server = new ApolloServer({ schema, context: createContext });
 
-new ApolloServer({ schema, context: createContext }).listen(
-  { port: PORT },
-  () => console.log(`Server ready at PORT: ${PORT} 🚀`)
-);
+// server.listen(
+//   { port: PORT },
+//   () => console.log(`Server ready at PORT: ${PORT} 🚀`)
+// );
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at: ${url}`);
+});
