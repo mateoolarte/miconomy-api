@@ -6,8 +6,6 @@ const PORT = process.env.PORT || 4000;
 const server = new ApolloServer({
   schema,
   context: createContext,
-  introspection: true,
-  playground: true,
 });
 
 server.listen({ port: PORT }, () =>
