@@ -1,3 +1,4 @@
 {
-  "*.{js,json,ts,tsx,md,mdx,yml,yaml}": "prettier --write"
+  "*.{js,json,ts,tsx,md,mdx,yml,yaml}": "prettier --write",
+  "*.test*": "yarn test"
 }
