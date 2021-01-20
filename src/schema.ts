@@ -12,7 +12,9 @@ const User = objectType({
 
 const Query = objectType({
   name: 'Query',
-  definition(t) {},
+  definition(t) {
+    t.crud.user();
+  },
 });
 
 const Mutation = objectType({

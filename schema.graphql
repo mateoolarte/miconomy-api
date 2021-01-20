@@ -6,7 +6,9 @@ type Mutation {
   signupUser(data: UserCreateInput!): User!
 }
 
-type Query
+type Query {
+  user(where: UserWhereUniqueInput!): User
+}
 
 type User {
   email: String!
@@ -17,4 +19,9 @@ type User {
 input UserCreateInput {
   email: String!
   name: String
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
 }
