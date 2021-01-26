@@ -3,6 +3,8 @@ import { nexusPrisma } from 'nexus-plugin-prisma';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+const { APP_SECRET } = process.env;
+
 const User = objectType({
   name: 'User',
   definition(t) {
@@ -63,7 +65,7 @@ const Mutation = objectType({
             password: pass,
           },
         });
-        const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+        const token = jwt.sign({ userId: user.id }, APP_SECRET || '');
 
         return {
           token,
@@ -88,7 +90,7 @@ const Mutation = objectType({
           throw new Error('Invalid password');
         }
 
-        const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+        const token = jwt.sign({ userId: user.id }, APP_SECRET || '');
 
         return {
           token,
