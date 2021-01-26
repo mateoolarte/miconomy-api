@@ -17,10 +17,10 @@ type Query {
 }
 
 type User {
-  email: String!
-  id: Int!
+  email: String
+  id: Int
   name: String
-  password: String!
+  password: String
 }
 
 input UserWhereUniqueInput {

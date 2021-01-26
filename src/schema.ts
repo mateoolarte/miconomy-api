@@ -13,8 +13,17 @@ const User = objectType({
   },
 });
 
+export interface AuthPayloadTypes {
+  user: object;
+  token: string;
+}
+
 const AuthPayload = objectType({
   name: 'AuthPayload',
+  sourceType: {
+    module: __filename,
+    export: 'AuthPayloadTypes',
+  },
   definition(t) {
     t.field('user', {
       type: 'User',
