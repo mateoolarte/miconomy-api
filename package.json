@@ -3,30 +3,30 @@
   "private": true,
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server",
+    "dev": "ts-node-dev --respawn --transpile-only src/server",
     "build": "npm -s run clean && npm -s run generate && tsc",
     "start": "node dist/server",
-    "clean": "rm -rf dist",
     "studio": "npx prisma studio",
+    "test": "jest",
+    "clean": "rm -rf dist",
     "migrate:dev": "npx prisma migrate dev --preview-feature",
     "migrate": "npx prisma migrate deploy --preview-feature",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema",
-    "test": "jest"
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema"
   },
   "engines": {
     "node": "15.0.1"
   },
   "dependencies": {
-    "@prisma/cli": "^2.14.0",
-    "@prisma/client": "^2.14.0",
+    "@prisma/cli": "^2.15.0",
+    "@prisma/client": "^2.15.0",
     "@types/node-fetch": "^2.5.8",
     "apollo-server": "^2.19.2",
     "bcrypt": "^5.0.0",
-    "graphql": "^15.4.0",
+    "graphql": "^15.5.0",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^1.0.0",
     "nexus-plugin-prisma": "^0.28.0",
