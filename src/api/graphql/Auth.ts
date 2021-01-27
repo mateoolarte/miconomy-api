@@ -1,11 +1,53 @@
-import { objectType, nonNull, stringArg } from 'nexus';
+import { queryType, mutationType, objectType, nonNull, stringArg } from 'nexus';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const { APP_SECRET } = process.env;
 
-const Mutation = objectType({
-  name: 'Mutation',
+export interface AuthPayloadTypes {
+  user: object;
+  token: string;
+}
+
+export const AuthPayload = objectType({
+  name: 'AuthPayload',
+  sourceType: {
+    module: __filename,
+    export: 'AuthPayloadTypes',
+  },
+  definition(t) {
+    t.field('user', {
+      type: 'User',
+      resolve({ user }) {
+        return user;
+      },
+    });
+    t.field('token', {
+      type: nonNull('String'),
+      resolve({ token }) {
+        return token;
+      },
+    });
+  },
+});
+
+export const User = objectType({
+  name: 'User',
+  definition(t) {
+    t.model.id();
+    t.model.name();
+    t.model.email();
+    t.model.password();
+  },
+});
+
+export const UserQuery = queryType({
+  definition(t) {
+    t.crud.user();
+  },
+});
+
+export const UserMutation = mutationType({
   definition(t) {
     t.field('signup', {
       type: 'AuthPayload',
@@ -57,5 +99,3 @@ const Mutation = objectType({
     });
   },
 });
-
-export default Mutation;
