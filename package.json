@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "license": "UNLICENSED",
-  "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server",
     "build": "npm -s run clean && npm -s run generate && tsc",
@@ -18,7 +17,7 @@
     "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema"
   },
   "engines": {
-    "node": "15.0.1"
+    "node": ">= 14.15"
   },
   "dependencies": {
     "@prisma/cli": "^2.15.0",

@@ -1,8 +1,8 @@
-# API Finance app
+# Miconomy API
 
 [![Codeship Status for mateoolarte/finance-api](https://app.codeship.com/projects/36a86f59-d2f7-4271-b018-5d581e8e01a6/status?branch=stg)](https://app.codeship.com/projects/424353)
 
-Here you can find the backend api of Finance app. Built with Nodejs & GraphQL
+Here you can find the backend api. Built with Nodejs & GraphQL
 
 ## Features
 
