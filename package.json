@@ -9,6 +9,7 @@
     "start": "node dist/server",
     "studio": "npx prisma studio",
     "test": "jest",
+    "test:watch": "jest --watch",
     "clean": "rm -rf dist",
     "migrate:dev": "npx prisma migrate dev --preview-feature",
     "migrate": "npx prisma migrate deploy --preview-feature",
