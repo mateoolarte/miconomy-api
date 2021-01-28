@@ -1,6 +1,6 @@
 # Miconomy API
 
-[![Codeship Status for mateoolarte/finance-api](https://app.codeship.com/projects/36a86f59-d2f7-4271-b018-5d581e8e01a6/status?branch=stg)](https://app.codeship.com/projects/424353)
+[![Codeship Status for mateoolarte/miconomy-api](https://app.codeship.com/projects/c0eac549-f965-49eb-ab8d-cd33b8c6b596/status?branch=master)](https://app.codeship.com/projects/425071)
 
 Here you can find the backend api. Built with Nodejs & GraphQL
 
