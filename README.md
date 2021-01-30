@@ -18,7 +18,7 @@ Here you can find the backend api. Built with Nodejs & GraphQL
 ## Prerequisites
 
 - Yarn
-- NodeJS >= 14.15
+- NodeJS >= 15
 
 ## Installation
 
