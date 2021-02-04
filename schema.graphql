@@ -9,11 +9,18 @@ type AuthPayload {
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload
+  resetPassword(email: String!): ResetPasswordPayload
   signup(email: String!, password: String!): AuthPayload
+  updatePassword(password: String!, token: String!): ResetPasswordPayload
 }
 
 type Query {
   user(where: UserWhereUniqueInput!): User
+}
+
+type ResetPasswordPayload {
+  message: String
+  status: String
 }
 
 type User {
