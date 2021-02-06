@@ -75,9 +75,14 @@ function prismaTestContext() {
     async before() {
       schema = `test_${nanoid(5)}`;
       databaseUrl = `${process.env.DATABASE_URL}?schema=${schema}`;
-      process.env.DATABASE_URL = databaseUrl;
+      let commandToExecute = 'migrate dev --preview-feature';
 
-      execSync(`${prismaBinary} migrate dev --preview-feature`, {
+      if (process.env.NODE_ENV !== 'development') {
+        commandToExecute = 'migrate deploy --preview-feature';
+      }
+
+      process.env.DATABASE_URL = databaseUrl;
+      execSync(`${prismaBinary} ${commandToExecute}`, {
         env: {
           ...process.env,
           DATABASE_URL: databaseUrl,
