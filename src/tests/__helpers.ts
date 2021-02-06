@@ -96,7 +96,9 @@ function prismaTestContext() {
 
     async after() {
       const client = new Client({
-        connectionString: databaseUrl,
+        connectionString: `${databaseUrl}?ssl=${
+          process.env.NODE_ENV !== 'development' ? 'true' : 'false'
+        }`,
       });
 
       await client.connect();
