@@ -1,80 +1,66 @@
-import { queryType, mutationType, objectType, nonNull, stringArg } from 'nexus';
+import { objectType, nonNull, stringArg, extendType } from 'nexus';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import sgMail from '@sendgrid/mail';
 
 const { APP_SECRET, SENDGRID_API_KEY, SENDGRID_EMAIL_SENDER } = process.env;
 
-export interface AuthPayloadTypes {
-  user: object;
-  token: string;
-}
-
-export const AuthPayload = objectType({
-  name: 'AuthPayload',
-  sourceType: {
-    module: __filename,
-    export: 'AuthPayloadTypes',
-  },
-  definition(t) {
-    t.field('user', {
-      type: 'User',
-      resolve({ user }) {
-        return user;
-      },
-    });
-    t.field('token', {
-      type: nonNull('String'),
-      resolve({ token }) {
-        return token;
-      },
-    });
-  },
-});
-
 export const User = objectType({
   name: 'User',
   definition(t) {
-    t.model.id();
-    t.model.name();
-    t.model.email();
-    t.model.password();
+    t.int('id');
+    t.string('name');
+    t.string('email');
+    t.string('password');
+  },
+});
+
+export const AuthPayload = objectType({
+  name: 'AuthPayload',
+  definition(t) {
+    t.field('user', {
+      type: 'User',
+    });
+    t.string('token');
+    t.int('status');
+    t.string('message');
   },
 });
 
 export const ResetPasswordPayload = objectType({
   name: 'ResetPasswordPayload',
   definition(t) {
-    t.field('status', {
-      type: 'String',
-      resolve({ status }: { status: string }) {
-        return status;
-      },
-    });
-    t.field('message', {
-      type: 'String',
-      resolve({ message }: { message: string }) {
-        return message;
-      },
-    });
+    t.string('status');
+    t.string('message');
   },
 });
 
-export const UserQuery = queryType({
+export const Signup = extendType({
+  type: 'Mutation',
   definition(t) {
-    t.crud.user();
-  },
-});
-
-export const UserMutation = mutationType({
-  definition(t) {
-    t.field('signup', {
+    t.nonNull.field('signup', {
       type: 'AuthPayload',
       args: {
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      async resolve(root, { email, password }, { prisma }) {
+      async resolve(_root, { email, password }, { prisma }) {
+        const userExist = await prisma.user.findUnique({ where: { email } });
+
+        if (userExist) {
+          return {
+            status: 404,
+            message: 'Este usuario ya existe',
+          };
+        }
+
+        if (password.length < 8) {
+          return {
+            status: 404,
+            message: 'La contraseña debe ser mayor o igual a 8 caracteres',
+          };
+        }
+
         const pass = await bcrypt.hash(password, 10);
         const user = await prisma.user.create({
           data: {
@@ -87,25 +73,38 @@ export const UserMutation = mutationType({
         return {
           token,
           user,
+          status: 202,
+          message: 'Se ha creado el usuario correctamente',
         };
       },
     });
+  },
+});
 
-    t.field('login', {
+export const Login = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('login', {
       type: 'AuthPayload',
       args: {
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
       },
-      async resolve(root, { email, password }, { prisma }) {
+      async resolve(_root, { email, password }, { prisma }) {
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) {
-          throw new Error('Usuario no encontrado');
+          return {
+            status: 404,
+            message: 'Usuario no encontrado',
+          };
         }
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {
-          throw new Error('Hubo un error en los datos ingresados');
+          return {
+            status: 404,
+            message: 'Hubo un error en los datos ingresados',
+          };
         }
 
         const token = jwt.sign(String(user.id), APP_SECRET || '');
@@ -113,16 +112,23 @@ export const UserMutation = mutationType({
         return {
           token,
           user,
+          status: 202,
+          message: 'El usuario ha ingresado correctamente',
         };
       },
     });
+  },
+});
 
-    t.field('resetPassword', {
+export const ResetPassword = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('resetPassword', {
       type: 'ResetPasswordPayload',
       args: {
         email: nonNull(stringArg()),
       },
-      async resolve(root, { email }, { prisma }) {
+      async resolve(_root, { email }, { prisma }) {
         const user = await prisma.user.findUnique({ where: { email } });
 
         if (!user) {
@@ -137,10 +143,10 @@ export const UserMutation = mutationType({
 
         const msg = {
           to: email,
-          from: SENDGRID_EMAIL_SENDER,
-          subject: 'Miconomy: Solicitud cambio de contraseña',
+          from: `Miconomy <${SENDGRID_EMAIL_SENDER}>`,
+          subject: 'Solicitud cambio de contraseña',
           text: `Haz clic en el siguiente enlace para hacer el cambio de tu contraseña https://miconomy.co/update-password/${token}`,
-          html: `Haz clic en el siguiente enlace para hacer el cambio de tu contraseña https://miconomy.co/update-password/${token}`,
+          html: `Haz clic en el siguiente enlace para hacer el cambio de tu contraseña <a href="https://miconomy.co/update-password/${token}">Cambio de contraseña</a>`,
         };
 
         try {
@@ -159,13 +165,19 @@ export const UserMutation = mutationType({
         }
       },
     });
-    t.field('updatePassword', {
+  },
+});
+
+export const UpdatePassword = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field('updatePassword', {
       type: 'ResetPasswordPayload',
       args: {
         password: nonNull(stringArg()),
         token: nonNull(stringArg()),
       },
-      async resolve(root, { password, token }, { prisma }) {
+      async resolve(_root, { password, token }, { prisma }) {
         const userEmail: any = jwt.verify(token, APP_SECRET);
 
         if (!userEmail) {

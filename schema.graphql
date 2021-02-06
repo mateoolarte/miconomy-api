@@ -3,19 +3,21 @@
 
 
 type AuthPayload {
-  token: String!
+  message: String
+  status: Int
+  token: String
   user: User
 }
 
 type Mutation {
-  login(email: String!, password: String!): AuthPayload
-  resetPassword(email: String!): ResetPasswordPayload
-  signup(email: String!, password: String!): AuthPayload
-  updatePassword(password: String!, token: String!): ResetPasswordPayload
+  login(email: String!, password: String!): AuthPayload!
+  resetPassword(email: String!): ResetPasswordPayload!
+  signup(email: String!, password: String!): AuthPayload!
+  updatePassword(password: String!, token: String!): ResetPasswordPayload!
 }
 
 type Query {
-  user(where: UserWhereUniqueInput!): User
+  ok: Boolean!
 }
 
 type ResetPasswordPayload {
@@ -28,9 +30,4 @@ type User {
   id: Int
   name: String
   password: String
-}
-
-input UserWhereUniqueInput {
-  email: String
-  id: Int
 }
