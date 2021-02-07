@@ -1,5 +1,4 @@
 import { makeSchema } from 'nexus';
-import { nexusPrisma } from 'nexus-plugin-prisma';
 
 import * as types from './graphql';
 
@@ -13,7 +12,6 @@ export const schema = makeSchema({
     module: require.resolve('./context'),
     export: 'Context',
   },
-  plugins: [nexusPrisma({ experimentalCRUD: true })],
   sourceTypes: {
     modules: [
       {
