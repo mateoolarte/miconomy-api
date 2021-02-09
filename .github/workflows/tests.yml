@@ -6,7 +6,6 @@ jobs:
   tests:
     name: Test API
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -17,12 +16,3 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           APP_SECRET: ${{ secrets.APP_SECRET }}
         run: yarn test
-  build:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: '15.x'
-  steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v1
