@@ -6,6 +6,9 @@ jobs:
   tests:
     name: Test API
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: '15.x'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
