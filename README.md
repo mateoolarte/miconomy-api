@@ -1,7 +1,5 @@
 # Miconomy API
 
-[![Codeship Status for mateoolarte/miconomy-api](https://app.codeship.com/projects/c0eac549-f965-49eb-ab8d-cd33b8c6b596/status?branch=stg)](https://app.codeship.com/projects/425071)
-
 Here you can find the backend api. Built with Nodejs & GraphQL
 
 ## Features
