@@ -7,15 +7,12 @@ jobs:
     name: Test API
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '15'
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
-      - name: Run tests
+      - run: yarn --frozen-lockfile
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           APP_SECRET: ${{ secrets.APP_SECRET }}
-        run: yarn test
+      - run: yarn test
