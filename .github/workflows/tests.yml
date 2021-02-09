@@ -6,12 +6,12 @@ jobs:
   tests:
     name: Test API
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: '15.x'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15'
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Run tests
