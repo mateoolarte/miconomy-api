@@ -8,7 +8,7 @@
     "build": "npm -s run clean && tsc",
     "start": "node dist/app",
     "studio": "npx prisma studio",
-    "test": "yarn generate:nexus && jest",
+    "test": "yarn generate && jest",
     "test:watch": "yarn generate:nexus && jest --watch",
     "clean": "rm -rf dist",
     "migrate:dev": "npx prisma migrate dev --preview-feature",

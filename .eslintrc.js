@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = {
   root: true,
@@ -7,7 +7,7 @@ module.exports = {
     node: true,
     es6: true,
     commonjs: true,
-    jest: true
+    jest: true,
   },
   parser: '@typescript-eslint/parser',
   extends: [
@@ -20,4 +20,8 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
   },
-}
+  rules: {
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+  },
+};

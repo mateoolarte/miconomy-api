@@ -12,6 +12,8 @@ Here you can find the backend api. Built with Nodejs & GraphQL
 - Typescript: Programming language with static typings
 - Jest: Test runner
 - Git hooks with Husky and Linted staged: To help checking test and formatters before a commit
+- ESLint: Validate the Typescript code style with best practices
+- Prettier: Formatter files with configured options
 
 ## Prerequisites
 
@@ -65,14 +67,38 @@ In this case, before run this command we should un/comment on the `.env` the rig
 yarn migrate
 ```
 
-### Sync and generate schema
+### Sync and generate prisma client from schema.prisma file
+
+```bash
+yarn generate:prisma
+```
+
+### Sync and generate nexus typings from schema.ts file
+
+```bash
+yarn generate:nexus
+```
+
+### Sync and generate prisma client and nexus typings code
 
 ```bash
 yarn generate
+```
+
+### Clean production folder
+
+```bash
+yarn clean
 ```
 
 ### Run tests
 
 ```bash
 yarn test
+```
+
+### Run watching tests
+
+```bash
+yarn test:watch
 ```

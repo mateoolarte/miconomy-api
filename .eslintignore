@@ -1,9 +1,9 @@
 **/node_modules/**
-**/test/**/*.js
+**/__tests__/**/*.ts
 **/*.d.ts
 **/.vscode
 **/package-lock.json
 **/yarn.lock
 
-/build/**
+/dist/**
 /coverage/
