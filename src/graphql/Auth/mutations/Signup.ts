@@ -1,8 +1,7 @@
 import { nonNull, stringArg, extendType } from 'nexus';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
-const { APP_SECRET } = process.env;
+import { generateToken } from '../../../utils/generateToken';
 
 export const Signup = extendType({
   type: 'Mutation',
@@ -37,7 +36,7 @@ export const Signup = extendType({
             password: pass,
           },
         });
-        const token = jwt.sign(String(user.id), APP_SECRET || '');
+        const token = generateToken({ userId: user.id }, '30 days');
 
         return {
           token,
