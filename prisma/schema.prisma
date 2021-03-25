@@ -8,8 +8,162 @@ generator client {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  name  String?
-  password String
+  id                Int     @default(autoincrement()) @id
+  email             String  @unique
+  name              String?
+  password          String
+  userMonths        UserMonth[]
+  categories        Category[]
+  savingCategories  SavingCategory[]
+  incomes           Income[]
+}
+
+model UserMonth {
+  id                      Int     @default(autoincrement()) @id
+  user                    User  @relation(fields: [userId], references: [id])
+  month                   Month @relation(fields: [monthId], references: [id])
+  userId                  Int
+  monthId                 Int
+  incomes                 Income[]
+  userMonthCategories     UserMonthCategory[]
+  userMonthSavingCategory UserMonthSavingCategory?
+}
+
+model Month {
+  id          Int     @default(autoincrement()) @id
+  date        DateTime
+  userMonths  UserMonth[]
+}
+
+model Income {
+  id          Int     @default(autoincrement()) @id
+  value       Int
+  date        DateTime
+  description String
+  updated     DateTime
+  user        User @relation(fields: [userId], references: [id])
+  userId      Int
+  userMonth   UserMonth @relation(fields: [userMonthId], references: [id])
+  userMonthId Int
+}
+
+
+model Category {
+  id                  Int     @default(autoincrement()) @id
+  name                String
+  isActive            Boolean
+  user                User @relation(fields: [userId], references: [id])
+  userId              Int
+  userMonthCategories UserMonthCategory[]
+  budgetCategories    BudgetCategory[]
+}
+
+model UserMonthCategory {
+  id          Int     @default(autoincrement()) @id
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  userMonth   UserMonth @relation(fields: [userMonthId], references: [id])
+  userMonthId Int
+  items       Item[]
+}
+
+model Item {
+  id                    Int     @default(autoincrement()) @id
+  description           String
+  itemBudget            Int
+  userMonthCategory     UserMonthCategory @relation(fields: [userMonthCategoryId], references: [id])
+  userMonthCategoryId   Int
+  expense               Expense[]
+}
+
+model Expense {
+  id          Int     @default(autoincrement()) @id
+  date        DateTime
+  description String
+  value       Int
+  item        Item @relation(fields: [itemId], references: [id])
+  itemId      Int
+}
+
+model UserMonthSavingCategory {
+  id                    Int     @default(autoincrement()) @id
+  userMonth             UserMonth @relation(fields: [userMonthId], references: [id])
+  userMonthId           Int
+  userMonthSavingItems  UserMonthSavingItem[]
+}
+
+model UserMonthSavingItem {
+  id                        Int     @default(autoincrement()) @id
+  value                     Int
+  sent                      Boolean
+  userMonthSavingCategory   UserMonthSavingCategory @relation(fields: [userMonthSavingCategoryId], references: [id])
+  userMonthSavingCategoryId Int
+  savingCategory            SavingCategory @relation(fields: [savingCategoryId], references: [id])
+  savingCategoryId          Int
+}
+
+model SavingCategory {
+  id                    Int     @default(autoincrement()) @id
+  name                  String
+  target                Int
+  value                 Int
+  user                  User @relation(fields: [userId], references: [id])
+  userId                Int
+  UserMonthSavingItems  UserMonthSavingItem[]
+  savingTransactions    SavingTransaction[]
+  budgetSavingItem      BudgetSavingItem[]
+}
+
+model SavingTransaction {
+  id                Int     @default(autoincrement()) @id
+  date              DateTime
+  value             Int
+  type              SavingTransactionType
+  savingCategory    SavingCategory @relation(fields: [savingCategoryId], references: [id])
+  savingCategoryId  Int
+}
+
+enum SavingTransactionType {
+  DEPOSIT
+  WITHDRAWAL
+}
+
+model Budget {
+  id                   Int     @default(autoincrement()) @id
+  name                 String
+  budgetCategories     BudgetCategory[]
+  budgetSavingCategory BudgetSavingCategory?
+}
+
+model BudgetCategory {
+  id          Int     @default(autoincrement()) @id
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  budget      Budget @relation(fields: [budgetId], references: [id])
+  budgetId    Int
+  budgetItems BudgetItem[]
+}
+
+model BudgetItem {
+  id                Int     @default(autoincrement()) @id
+  description       String
+  itemBudget        Int
+  budgetCategory    BudgetCategory @relation(fields:[budgetCategoryId], references: [id])
+  budgetCategoryId  Int
+}
+
+model BudgetSavingCategory {
+  id                Int     @default(autoincrement()) @id
+  budget      Budget @relation(fields: [budgetId], references: [id])
+  budgetId    Int
+  budgetSavingItems BudgetSavingItem[]
+}
+
+model BudgetSavingItem {
+  id                      Int     @default(autoincrement()) @id
+  value                   Int
+  budgetSavingCategory    BudgetSavingCategory @relation(fields: [budgetSavingCategoryId], references: [id])
+  budgetSavingCategoryId  Int
+  savingCategory          SavingCategory @relation(fields: [savingCategoryId], references: [id])
+  savingCategoryId        Int
 }
