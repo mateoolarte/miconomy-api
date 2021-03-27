@@ -9,7 +9,13 @@ type AuthPayload {
   user: User
 }
 
+type DeleteUserPayload {
+  message: String
+  status: String
+}
+
 type Mutation {
+  deleteUser(token: String!): DeleteUserPayload!
   login(email: String!, password: String!): AuthPayload!
   resetPassword(email: String!): ResetPasswordPayload!
   signup(email: String!, password: String!): AuthPayload!
@@ -18,6 +24,7 @@ type Mutation {
 
 type Query {
   ok: Boolean!
+  getUser(token: String!): User!
 }
 
 type ResetPasswordPayload {
