@@ -27,7 +27,7 @@ export const UpdatePassword = extendType({
         try {
           const updatedPassword = await bcrypt.hash(password, 10);
           await db.user.update({
-            where: { email: userEmail },
+            where: { id: userEmail.userId },
             data: { password: updatedPassword },
           });
 
