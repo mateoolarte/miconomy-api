@@ -19,7 +19,7 @@ model User {
 }
 
 model UserMonth {
-  id                      Int     @default(autoincrement()) @id
+  id                      Int   @default(autoincrement()) @id
   user                    User  @relation(fields: [userId], references: [id])
   month                   Month @relation(fields: [monthId], references: [id])
   userId                  Int

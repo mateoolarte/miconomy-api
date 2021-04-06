@@ -1,11 +1,10 @@
 import { objectType } from 'nexus';
 
-export const User = objectType({
-  name: 'User',
+export const Category = objectType({
+  name: 'Category',
   definition(t) {
     t.int('id');
     t.string('name');
-    t.string('email');
-    t.string('password');
+    t.boolean('isActive');
   },
 });
