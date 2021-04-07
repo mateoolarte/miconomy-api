@@ -25,6 +25,11 @@ type DeleteUserPayload {
   status: String
 }
 
+type Expense {
+  id: Int
+  value: Int
+}
+
 type Income {
   date: Date
   description: String
@@ -32,7 +37,19 @@ type Income {
   value: Int
 }
 
+type Item {
+  budget: Int
+  description: String
+  expenses: [Expense]
+  id: Int
+}
+
 type Mutation {
+  addCategory(name: String!): Category!
+  addExpense(description: String!, itemId: Int!, value: Int!): Expense!
+  addIncome(description: String!, userMonthId: Int!, value: Int!): Income!
+  addUserMonth(monthId: Int!, userId: Int!): UserMonth!
+  addUserMonthCategory(categoryId: Int!, userMonthId: Int!): Category!
   deleteUser(token: String!): DeleteUserPayload!
   login(email: String!, password: String!): AuthPayload!
   resetPassword(email: String!): ResetPasswordPayload!
@@ -48,8 +65,10 @@ type OverviewMonthPayload {
 }
 
 type Query {
+  getItems(userCategoryId: Int!): [Item!]
   getUser(token: String!): User!
-  getUserMonth(month: String!): UserMonth!
+  getUserMonth(month: String!, userToken: String!): UserMonth!
+  getUserMonthCategories(userMonthId: Int!): UserMonthCategories!
   overviewMonth(month: String!): OverviewMonthPayload!
 }
 
@@ -72,9 +91,15 @@ type UserMonth {
   value: Int
 }
 
+type UserMonthCategories {
+  categories: [Category]
+  id: Int
+}
+
 type UserMonthCategory {
   category: Category
   id: Int
+  items: [Item]
 }
 
 type UserMonthSavingCategory {

@@ -9,15 +9,23 @@ export const GetUserMonth = extendType({
       type: 'UserMonth',
       args: {
         month: nonNull(stringArg()),
+        userToken: nonNull(stringArg()),
       },
       async resolve(_root, { month }, { db, req }) {
         checkAuth(req);
 
+        const getMonth = await db.month.findFirst({
+          where: {
+            date: month,
+          },
+        });
+        const monthId = getMonth?.id;
+
         return {
-          incomes: [],
-          available: 0,
-          notInBudget: 0,
-          savings: 0,
+          id: monthId,
+          value: 0,
+          categories: [],
+          savingCategories: [],
         };
       },
     });

@@ -7,5 +7,8 @@ export const UserMonthCategory = objectType({
     t.field('category', {
       type: 'Category',
     });
+    t.list.field('items', {
+      type: 'Item',
+    });
   },
 });
