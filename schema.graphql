@@ -59,9 +59,12 @@ type Mutation {
 
 type OverviewMonthPayload {
   available: Int
+  error: String
   incomes: [Income]
+  lastExpense: String
   notInBudget: Int
   savings: Int
+  status: Int
 }
 
 type Query {
@@ -69,7 +72,7 @@ type Query {
   getUser(token: String!): User!
   getUserMonth(month: String!, userToken: String!): UserMonth!
   getUserMonthCategories(userMonthId: Int!): UserMonthCategories!
-  overviewMonth(month: String!): OverviewMonthPayload!
+  overviewMonth(month: String!, userToken: String!): OverviewMonthPayload!
 }
 
 type ResetPasswordPayload {
@@ -86,14 +89,16 @@ type User {
 
 type UserMonth {
   categories: [UserMonthCategory]
+  error: String
   id: Int
   savingCategories: [UserMonthSavingCategory]
-  value: Int
+  status: Int
 }
 
 type UserMonthCategories {
   categories: [Category]
   id: Int
+  items: [Item]
 }
 
 type UserMonthCategory {
