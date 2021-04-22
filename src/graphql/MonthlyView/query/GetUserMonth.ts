@@ -1,9 +1,6 @@
 import { nonNull, stringArg, extendType } from 'nexus';
-import jwt from 'jsonwebtoken';
 
 import { checkAuth } from '../../../utils/checkAuth';
-
-const { APP_SECRET } = process.env;
 
 export const GetUserMonth = extendType({
   type: 'Query',
@@ -12,10 +9,10 @@ export const GetUserMonth = extendType({
       type: 'UserMonth',
       args: {
         month: nonNull(stringArg()),
-        userToken: nonNull(stringArg()),
       },
-      async resolve(_root, { month, userToken }, { db, req }) {
+      async resolve(_root, { month }, { db, req }) {
         const user: any = checkAuth(req);
+        const { userId } = user;
 
         const defaultResponse = {
           id: null,
@@ -26,17 +23,6 @@ export const GetUserMonth = extendType({
         };
 
         try {
-          const currentUser: any = jwt.verify(userToken, APP_SECRET);
-          const { userId } = currentUser;
-
-          if (user?.userId !== userId) {
-            return {
-              ...defaultResponse,
-              status: 401,
-              error: 'No tienes permisos para ingresar a esta sección',
-            };
-          }
-
           const userMonth = await db.userMonth.findFirst({
             where: {
               month: {
@@ -56,12 +42,18 @@ export const GetUserMonth = extendType({
           });
 
           if (userMonth) {
+            const {
+              id,
+              userMonthCategories,
+              userMonthSavingCategory,
+            } = userMonth;
+
             return {
               ...defaultResponse,
-              id: userMonth?.id,
+              id,
               status: 200,
-              categories: userMonth?.userMonthCategories,
-              savingCategories: userMonth?.userMonthSavingCategory,
+              categories: userMonthCategories,
+              savingCategories: userMonthSavingCategory,
             };
           }
 

@@ -5,5 +5,6 @@ export const Expense = objectType({
   definition(t) {
     t.int('id');
     t.int('value');
+    t.string('description');
   },
 });

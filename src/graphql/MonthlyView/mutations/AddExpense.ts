@@ -13,7 +13,28 @@ export const AddExpense = extendType({
         description: nonNull(stringArg()),
       },
       async resolve(_root, { itemId, value, description }, { db, req }) {
-        // checkAuth(req);
+        checkAuth(req);
+
+        try {
+          const expenseAdded = await db.expense.create({
+            data: {
+              itemId,
+              description,
+              value,
+              date: new Date(),
+            },
+          });
+
+          return {
+            id: expenseAdded.id,
+            value: expenseAdded.value,
+          };
+        } catch (error) {
+          return {
+            id: null,
+            value: null,
+          };
+        }
       },
     });
   },

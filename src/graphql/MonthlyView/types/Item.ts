@@ -5,7 +5,7 @@ export const Item = objectType({
   definition(t) {
     t.int('id');
     t.string('description');
-    t.int('budget');
+    t.int('itemBudget');
     t.list.field('expenses', {
       type: 'Expense',
     });
