@@ -1,10 +1,10 @@
 export { GetUserMonth } from './query/GetUserMonth';
-export { GetItems } from './query/GetItems';
+// export { GetItems } from './query/GetItems';
 
-export { AddUserMonthCategory } from './mutations/AddUserMonthCategory';
+// export { AddUserMonthCategory } from './mutations/AddUserMonthCategory';
 export { AddExpense } from './mutations/AddExpense';
-export { AddIncome } from './mutations/AddIncome';
-export { AddUserMonth } from './mutations/AddUserMonth';
+// export { AddIncome } from './mutations/AddIncome';
+// export { AddUserMonth } from './mutations/AddUserMonth';
 
 export { Item } from './types/Item';
 export { Expense } from './types/Expense';

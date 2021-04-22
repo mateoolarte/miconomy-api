@@ -3,9 +3,9 @@ export { OverviewMonth } from './query/OverviewMonth';
 export { GetUserCategories } from './query/GetUserCategories';
 
 export { DeleteUser } from './mutations/DeleteUser';
-export { AddCategory } from './mutations/AddCategory';
+// export { AddCategory } from './mutations/AddCategory';
 
-export { GQLDate } from './types/DateTime';
+export { DateTimeScalar } from './types/DateTime';
 export { User } from './types/User';
 export { Income } from './types/Income';
 export { Category } from './types/Category';

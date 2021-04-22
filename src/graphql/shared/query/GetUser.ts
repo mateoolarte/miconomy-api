@@ -12,8 +12,16 @@ export const GetUser = extendType({
       },
       async resolve(_root, { token }, { db }) {
         const email: any = jwt.verify(token, APP_SECRET);
+        const defaultResponse = {
+          id: null,
+          name: null,
+          email: null,
+          password: null,
+        };
+
         if (!email) {
           return {
+            ...defaultResponse,
             status: 404,
             message: 'Invalid Token',
           };
@@ -30,12 +38,14 @@ export const GetUser = extendType({
             };
           } else {
             return {
+              ...defaultResponse,
               status: 404,
               message: 'Something went wrong',
             };
           }
         } catch (error) {
           return {
+            ...defaultResponse,
             status: error.code,
             message: 'Something went wrong',
           };
