@@ -11,7 +11,7 @@
 //         name: nonNull(stringArg()),
 //       },
 //       async resolve(_root, { name }, { db, req }) {
-//         // checkAuth(req);
+//         checkAuth(req);
 //       },
 //     });
 //   },

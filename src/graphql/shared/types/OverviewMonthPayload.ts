@@ -9,7 +9,9 @@ export const OverviewMonthPayload = objectType({
       type: 'Income',
     });
     t.int('available');
-    t.string('lastExpense');
+    t.field('lastExpense', {
+      type: 'Expense',
+    });
     t.nullable.int('notInBudget');
     t.nullable.int('savings');
   },

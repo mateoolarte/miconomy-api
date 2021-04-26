@@ -1,9 +1,46 @@
 import { nonNull, stringArg, extendType } from 'nexus';
-import jwt from 'jsonwebtoken';
 
 import { checkAuth } from '../../../utils/checkAuth';
 
-const { APP_SECRET } = process.env;
+function getTotalExpenses(aCategories, valCategories) {
+  return (
+    aCategories +
+    valCategories.items.reduce((aItems, valItems) => {
+      return (
+        aItems +
+        valItems.expense.reduce((aExpenses, valExpenses) => {
+          return aExpenses + valExpenses.value;
+        }, 0)
+      );
+    }, 0)
+  );
+}
+
+function getTotalSentSavings(accumulator, currentValue) {
+  if (currentValue.sent) {
+    accumulator += currentValue.value;
+  }
+
+  return accumulator;
+}
+
+function getTotalIncome(accumulator, currentValue) {
+  return accumulator + currentValue.value;
+}
+
+function getLastExpense(result, currentValue) {
+  result = currentValue.items[0].expense[0];
+
+  currentValue.items.forEach(valItem => {
+    valItem.expense.forEach(valExpense => {
+      if (result.date < valExpense.date) {
+        result = valExpense;
+      }
+    });
+  });
+
+  return result;
+}
 
 export const OverviewMonth = extendType({
   type: 'Query',
@@ -12,33 +49,22 @@ export const OverviewMonth = extendType({
       type: 'OverviewMonthPayload',
       args: {
         month: nonNull(stringArg()),
-        userToken: nonNull(stringArg()),
       },
-      async resolve(_root, { month, userToken }, { db, req }) {
+      async resolve(_root, { month }, { db, req }) {
         const user: any = checkAuth(req);
+        const { userId } = user;
 
         const defaultResponse = {
           error: null,
           status: 500,
           incomes: [],
           available: 0,
-          lastExpense: '',
+          lastExpense: {},
           notInBudget: 0,
           savings: 0,
         };
 
         try {
-          const currentUser: any = jwt.verify(userToken, APP_SECRET);
-          const { userId } = currentUser;
-
-          if (user?.userId !== userId) {
-            return {
-              ...defaultResponse,
-              status: 401,
-              error: 'No tienes permisos para ingresar a esta sección',
-            };
-          }
-
           const userMonth = await db.userMonth.findFirst({
             where: {
               month: {
@@ -57,18 +83,36 @@ export const OverviewMonth = extendType({
                   },
                 },
               },
+              userMonthSavingCategory: {
+                include: {
+                  userMonthSavingItems: true,
+                },
+              },
             },
           });
-          const categories = userMonth?.userMonthCategories;
+          const totalExpenses = userMonth?.userMonthCategories.reduce(
+            getTotalExpenses,
+            0
+          );
+          const totalSentSavings = userMonth?.userMonthSavingCategory.userMonthSavingItems.reduce(
+            getTotalSentSavings,
+            0
+          );
+          const totalIncome = userMonth?.incomes.reduce(getTotalIncome, 0);
+          const available = totalIncome - totalExpenses - totalSentSavings;
+          const lastExpense = userMonth?.userMonthCategories.reduce(
+            getLastExpense,
+            ''
+          );
 
           return {
             ...defaultResponse,
             status: 200,
             incomes: userMonth?.incomes,
-            available: 0,
-            lastExpense: '',
-            notInBudget: 0,
-            savings: 0,
+            available,
+            lastExpense,
+            notInBudget: 0, // TBD
+            savings: 0, // TBD
           };
         } catch (error) {
           return {

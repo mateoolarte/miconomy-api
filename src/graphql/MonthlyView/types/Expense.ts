@@ -6,5 +6,6 @@ export const Expense = objectType({
     t.int('id');
     t.int('value');
     t.string('description');
+    t.date('date');
   },
 });
