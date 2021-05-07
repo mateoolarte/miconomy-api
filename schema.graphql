@@ -26,7 +26,7 @@ type DeleteUserPayload {
 }
 
 type Expense {
-  date: String
+  date: DateTime
   description: String
   id: Int
   value: Int
@@ -44,6 +44,11 @@ type Item {
   expenses: [Expense]
   id: Int
   itemBudget: Int
+}
+
+type ItemExpense {
+  description: String
+  id: Int
 }
 
 type Mutation {
@@ -66,6 +71,7 @@ type OverviewMonthPayload {
 }
 
 type Query {
+  getItems(categoryId: Int!): [ItemExpense!]
   getUser(token: String!): User!
   getUserCategories: UserCategories!
   getUserMonth(month: String!): UserMonth!

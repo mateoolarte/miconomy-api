@@ -11,3 +11,11 @@ export const Item = objectType({
     });
   },
 });
+
+export const ItemExpense = objectType({
+  name: 'ItemExpense',
+  definition(t) {
+    t.int('id');
+    t.string('description');
+  },
+});
