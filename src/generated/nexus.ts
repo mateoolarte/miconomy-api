@@ -42,7 +42,7 @@ export interface NexusGenScalars {
   Float: number;
   Boolean: boolean;
   ID: string;
-  DateTime: DateTime;
+  DateTime: any;
 }
 
 export interface NexusGenObjects {
