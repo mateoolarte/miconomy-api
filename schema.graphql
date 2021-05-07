@@ -53,6 +53,7 @@ type ItemExpense {
 
 type Mutation {
   addExpense(description: String!, itemId: Int!, value: Int!): Expense!
+  addIncome(description: String!, userMonthId: Int!, value: Int!): Income!
   deleteUser(token: String!): DeleteUserPayload!
   login(email: String!, password: String!): AuthPayload!
   resetPassword(email: String!): ResetPasswordPayload!

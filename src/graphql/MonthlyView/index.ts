@@ -3,7 +3,7 @@ export { GetItems } from './query/GetItems';
 
 // export { AddUserMonthCategory } from './mutations/AddUserMonthCategory';
 export { AddExpense } from './mutations/AddExpense';
-// export { AddIncome } from './mutations/AddIncome';
+export { AddIncome } from './mutations/AddIncome';
 // export { AddUserMonth } from './mutations/AddUserMonth';
 
 export { Item, ItemExpense } from './types/Item';
