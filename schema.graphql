@@ -52,6 +52,7 @@ type ItemExpense {
 }
 
 type Mutation {
+  addCategory(name: String!): Category!
   addExpense(description: String!, itemId: Int!, value: Int!): Expense!
   addIncome(description: String!, userMonthId: Int!, value: Int!): Income!
   addUserMonthCategory(categoryId: Int!, userMonthId: Int!): Category!

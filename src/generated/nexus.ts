@@ -204,6 +204,7 @@ export interface NexusGenFieldTypes {
   };
   Mutation: {
     // field return type
+    addCategory: NexusGenRootTypes['Category']; // Category!
     addExpense: NexusGenRootTypes['Expense']; // Expense!
     addIncome: NexusGenRootTypes['Income']; // Income!
     addUserMonthCategory: NexusGenRootTypes['Category']; // Category!
@@ -325,6 +326,7 @@ export interface NexusGenFieldTypeNames {
   };
   Mutation: {
     // field return type name
+    addCategory: 'Category';
     addExpense: 'Expense';
     addIncome: 'Income';
     addUserMonthCategory: 'Category';
@@ -399,6 +401,10 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addCategory: {
+      // args
+      name: string; // String!
+    };
     addExpense: {
       // args
       description: string; // String!
