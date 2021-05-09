@@ -206,6 +206,7 @@ export interface NexusGenFieldTypes {
     // field return type
     addExpense: NexusGenRootTypes['Expense']; // Expense!
     addIncome: NexusGenRootTypes['Income']; // Income!
+    addUserMonthCategory: NexusGenRootTypes['Category']; // Category!
     deleteUser: NexusGenRootTypes['DeleteUserPayload']; // DeleteUserPayload!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     resetPassword: NexusGenRootTypes['ResetPasswordPayload']; // ResetPasswordPayload!
@@ -326,6 +327,7 @@ export interface NexusGenFieldTypeNames {
     // field return type name
     addExpense: 'Expense';
     addIncome: 'Income';
+    addUserMonthCategory: 'Category';
     deleteUser: 'DeleteUserPayload';
     login: 'AuthPayload';
     resetPassword: 'ResetPasswordPayload';
@@ -408,6 +410,11 @@ export interface NexusGenArgTypes {
       description: string; // String!
       userMonthId: number; // Int!
       value: number; // Int!
+    };
+    addUserMonthCategory: {
+      // args
+      categoryId: number; // Int!
+      userMonthId: number; // Int!
     };
     deleteUser: {
       // args

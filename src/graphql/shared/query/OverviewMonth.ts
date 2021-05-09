@@ -16,8 +16,25 @@ function getTotalExpenses(aCategories, valCategories) {
   );
 }
 
+function getTotalBudget(aCategories, valCategories) {
+  return (
+    aCategories +
+    valCategories.items.reduce((aItems, valItems) => {
+      return aItems + valItems.itemBudget;
+    }, 0)
+  );
+}
+
 function getTotalSentSavings(accumulator, currentValue) {
   if (currentValue.sent) {
+    accumulator += currentValue.value;
+  }
+
+  return accumulator;
+}
+
+function getTotalNotSentSavings(accumulator, currentValue) {
+  if (!currentValue.sent) {
     accumulator += currentValue.value;
   }
 
@@ -78,6 +95,7 @@ export const OverviewMonth = extendType({
                 include: {
                   items: {
                     select: {
+                      itemBudget: true,
                       expense: true,
                     },
                   },
@@ -90,20 +108,21 @@ export const OverviewMonth = extendType({
               },
             },
           });
-          const totalExpenses = userMonth?.userMonthCategories.reduce(
-            getTotalExpenses,
-            0
-          );
+          const categories = userMonth?.userMonthCategories;
+          const totalExpenses = categories.reduce(getTotalExpenses, 0);
+          const totalBudget = categories.reduce(getTotalBudget, 0);
           const totalSentSavings = userMonth?.userMonthSavingCategory.userMonthSavingItems.reduce(
             getTotalSentSavings,
             0
           );
+          const totalNotSentSavings = userMonth?.userMonthSavingCategory.userMonthSavingItems.reduce(
+            getTotalNotSentSavings,
+            0
+          );
           const totalIncome = userMonth?.incomes.reduce(getTotalIncome, 0);
           const available = totalIncome - totalExpenses - totalSentSavings;
-          const lastExpense = userMonth?.userMonthCategories.reduce(
-            getLastExpense,
-            ''
-          );
+          const lastExpense = categories.reduce(getLastExpense, '');
+          const notInBudget = totalIncome - totalBudget;
 
           return {
             ...defaultResponse,
@@ -111,8 +130,8 @@ export const OverviewMonth = extendType({
             incomes: userMonth?.incomes,
             available,
             lastExpense,
-            notInBudget: 0, // TBD
-            savings: 0, // TBD
+            notInBudget,
+            savings: totalNotSentSavings,
           };
         } catch (error) {
           return {
