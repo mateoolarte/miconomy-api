@@ -34,10 +34,18 @@ export const GetUserMonth = extendType({
               userMonthCategories: {
                 include: {
                   category: true,
-                  items: true,
+                  items: {
+                    include: {
+                      expense: true,
+                    },
+                  },
                 },
               },
-              userMonthSavingCategory: true,
+              userMonthSavingCategory: {
+                include: {
+                  userMonthSavingItems: true,
+                },
+              },
             },
           });
 
@@ -47,6 +55,8 @@ export const GetUserMonth = extendType({
               userMonthCategories,
               userMonthSavingCategory,
             } = userMonth;
+
+            console.log(userMonthCategories[0].items);
 
             return {
               ...defaultResponse,

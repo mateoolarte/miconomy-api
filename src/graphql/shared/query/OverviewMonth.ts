@@ -46,8 +46,6 @@ function getTotalIncome(accumulator, currentValue) {
 }
 
 function getLastExpense(result, currentValue) {
-  result = currentValue.items[0].expense[0];
-
   currentValue.items.forEach(valItem => {
     valItem.expense.forEach(valExpense => {
       if (result.date < valExpense.date) {
@@ -108,31 +106,43 @@ export const OverviewMonth = extendType({
               },
             },
           });
+
           const categories = userMonth?.userMonthCategories;
           const totalExpenses = categories.reduce(getTotalExpenses, 0);
           const totalBudget = categories.reduce(getTotalBudget, 0);
-          const totalSentSavings = userMonth?.userMonthSavingCategory.userMonthSavingItems.reduce(
+          const totalSentSavings = userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
             getTotalSentSavings,
             0
           );
-          const totalNotSentSavings = userMonth?.userMonthSavingCategory.userMonthSavingItems.reduce(
+          const totalNotSentSavings = userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
             getTotalNotSentSavings,
             0
           );
           const totalIncome = userMonth?.incomes.reduce(getTotalIncome, 0);
           const available = totalIncome - totalExpenses - totalSentSavings;
-          const lastExpense = categories.reduce(getLastExpense, '');
+          const lastExpense = categories.reduce(
+            getLastExpense,
+            categories[0]?.items[0]?.expense[0]
+          );
           const notInBudget = totalIncome - totalBudget;
 
-          return {
-            ...defaultResponse,
-            status: 200,
-            incomes: userMonth?.incomes,
-            available,
-            lastExpense,
-            notInBudget,
-            savings: totalNotSentSavings,
-          };
+          if (!categories.length) {
+            return {
+              ...defaultResponse,
+            };
+          }
+
+          if (categories.length) {
+            return {
+              ...defaultResponse,
+              status: 200,
+              incomes: userMonth?.incomes.slice(0, 3),
+              available,
+              lastExpense,
+              notInBudget,
+              savings: totalNotSentSavings,
+            };
+          }
         } catch (error) {
           return {
             ...defaultResponse,

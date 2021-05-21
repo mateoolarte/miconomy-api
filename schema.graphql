@@ -41,7 +41,7 @@ type Income {
 
 type Item {
   description: String
-  expenses: [Expense]
+  expense: [Expense]
   id: Int
   itemBudget: Int
 }
@@ -103,7 +103,7 @@ type UserMonth {
   categories: [UserMonthCategory]
   error: String
   id: Int
-  savingCategories: [UserMonthSavingCategory]
+  savingCategories: UserMonthSavingCategory
   status: Int
 }
 
@@ -115,7 +115,7 @@ type UserMonthCategory {
 
 type UserMonthSavingCategory {
   id: Int
-  savingItems: [UserMonthSavingItem]
+  userMonthSavingItems: [UserMonthSavingItem]
 }
 
 type UserMonthSavingItem {

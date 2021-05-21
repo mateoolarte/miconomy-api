@@ -81,7 +81,7 @@ export interface NexusGenObjects {
   Item: {
     // root type
     description?: string | null; // String
-    expenses?: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    expense?: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
     id?: number | null; // Int
     itemBudget?: number | null; // Int
   };
@@ -125,9 +125,7 @@ export interface NexusGenObjects {
     categories?: Array<NexusGenRootTypes['UserMonthCategory'] | null> | null; // [UserMonthCategory]
     error?: string | null; // String
     id?: number | null; // Int
-    savingCategories?: Array<
-      NexusGenRootTypes['UserMonthSavingCategory'] | null
-    > | null; // [UserMonthSavingCategory]
+    savingCategories?: NexusGenRootTypes['UserMonthSavingCategory'] | null; // UserMonthSavingCategory
     status?: number | null; // Int
   };
   UserMonthCategory: {
@@ -139,7 +137,9 @@ export interface NexusGenObjects {
   UserMonthSavingCategory: {
     // root type
     id?: number | null; // Int
-    savingItems?: Array<NexusGenRootTypes['UserMonthSavingItem'] | null> | null; // [UserMonthSavingItem]
+    userMonthSavingItems?: Array<
+      NexusGenRootTypes['UserMonthSavingItem'] | null
+    > | null; // [UserMonthSavingItem]
   };
   UserMonthSavingItem: {
     // root type
@@ -193,7 +193,7 @@ export interface NexusGenFieldTypes {
   Item: {
     // field return type
     description: string | null; // String
-    expenses: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    expense: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
     id: number | null; // Int
     itemBudget: number | null; // Int
   };
@@ -255,9 +255,7 @@ export interface NexusGenFieldTypes {
     categories: Array<NexusGenRootTypes['UserMonthCategory'] | null> | null; // [UserMonthCategory]
     error: string | null; // String
     id: number | null; // Int
-    savingCategories: Array<
-      NexusGenRootTypes['UserMonthSavingCategory'] | null
-    > | null; // [UserMonthSavingCategory]
+    savingCategories: NexusGenRootTypes['UserMonthSavingCategory'] | null; // UserMonthSavingCategory
     status: number | null; // Int
   };
   UserMonthCategory: {
@@ -269,7 +267,9 @@ export interface NexusGenFieldTypes {
   UserMonthSavingCategory: {
     // field return type
     id: number | null; // Int
-    savingItems: Array<NexusGenRootTypes['UserMonthSavingItem'] | null> | null; // [UserMonthSavingItem]
+    userMonthSavingItems: Array<
+      NexusGenRootTypes['UserMonthSavingItem'] | null
+    > | null; // [UserMonthSavingItem]
   };
   UserMonthSavingItem: {
     // field return type
@@ -315,7 +315,7 @@ export interface NexusGenFieldTypeNames {
   Item: {
     // field return type name
     description: 'String';
-    expenses: 'Expense';
+    expense: 'Expense';
     id: 'Int';
     itemBudget: 'Int';
   };
@@ -389,7 +389,7 @@ export interface NexusGenFieldTypeNames {
   UserMonthSavingCategory: {
     // field return type name
     id: 'Int';
-    savingItems: 'UserMonthSavingItem';
+    userMonthSavingItems: 'UserMonthSavingItem';
   };
   UserMonthSavingItem: {
     // field return type name

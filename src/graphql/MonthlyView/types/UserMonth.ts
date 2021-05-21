@@ -9,7 +9,7 @@ export const UserMonth = objectType({
     t.list.field('categories', {
       type: 'UserMonthCategory',
     });
-    t.list.field('savingCategories', {
+    t.field('savingCategories', {
       type: 'UserMonthSavingCategory',
     });
   },
