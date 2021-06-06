@@ -56,8 +56,6 @@ export const GetUserMonth = extendType({
               userMonthSavingCategory,
             } = userMonth;
 
-            console.log(userMonthCategories[0].items);
-
             return {
               ...defaultResponse,
               id,

@@ -78,6 +78,7 @@ type Query {
   getUser(token: String!): User!
   getUserCategories: UserCategories!
   getUserMonth(month: String!): UserMonth!
+  getUserMonthCategories(userMonthId: Int!): [UserMonthCategory!]
   overviewMonth(month: String!): OverviewMonthPayload!
 }
 
@@ -105,6 +106,10 @@ type UserMonth {
   id: Int
   savingCategories: UserMonthSavingCategory
   status: Int
+}
+
+type UserMonthCategories {
+  categories: [Category]
 }
 
 type UserMonthCategory {

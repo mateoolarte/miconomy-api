@@ -128,6 +128,10 @@ export interface NexusGenObjects {
     savingCategories?: NexusGenRootTypes['UserMonthSavingCategory'] | null; // UserMonthSavingCategory
     status?: number | null; // Int
   };
+  UserMonthCategories: {
+    // root type
+    categories?: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+  };
   UserMonthCategory: {
     // root type
     category?: NexusGenRootTypes['Category'] | null; // Category
@@ -230,6 +234,7 @@ export interface NexusGenFieldTypes {
     getUser: NexusGenRootTypes['User']; // User!
     getUserCategories: NexusGenRootTypes['UserCategories']; // UserCategories!
     getUserMonth: NexusGenRootTypes['UserMonth']; // UserMonth!
+    getUserMonthCategories: NexusGenRootTypes['UserMonthCategory'][] | null; // [UserMonthCategory!]
     overviewMonth: NexusGenRootTypes['OverviewMonthPayload']; // OverviewMonthPayload!
   };
   ResetPasswordPayload: {
@@ -257,6 +262,10 @@ export interface NexusGenFieldTypes {
     id: number | null; // Int
     savingCategories: NexusGenRootTypes['UserMonthSavingCategory'] | null; // UserMonthSavingCategory
     status: number | null; // Int
+  };
+  UserMonthCategories: {
+    // field return type
+    categories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
   };
   UserMonthCategory: {
     // field return type
@@ -352,6 +361,7 @@ export interface NexusGenFieldTypeNames {
     getUser: 'User';
     getUserCategories: 'UserCategories';
     getUserMonth: 'UserMonth';
+    getUserMonthCategories: 'UserMonthCategory';
     overviewMonth: 'OverviewMonthPayload';
   };
   ResetPasswordPayload: {
@@ -379,6 +389,10 @@ export interface NexusGenFieldTypeNames {
     id: 'Int';
     savingCategories: 'UserMonthSavingCategory';
     status: 'Int';
+  };
+  UserMonthCategories: {
+    // field return type name
+    categories: 'Category';
   };
   UserMonthCategory: {
     // field return type name
@@ -458,6 +472,10 @@ export interface NexusGenArgTypes {
     getUserMonth: {
       // args
       month: string; // String!
+    };
+    getUserMonthCategories: {
+      // args
+      userMonthId: number; // Int!
     };
     overviewMonth: {
       // args

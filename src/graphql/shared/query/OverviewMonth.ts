@@ -131,12 +131,22 @@ export const OverviewMonth = extendType({
               ...defaultResponse,
             };
           }
+          const sortIncomes = userMonth?.incomes
+            .sort((a, b) => {
+              const valueA = String(a.date);
+              const valueB = String(b.date);
+
+              if (valueA < valueB) return -1;
+              if (valueA > valueB) return 1;
+              return 0;
+            })
+            .slice(0, 3);
 
           if (categories.length) {
             return {
               ...defaultResponse,
               status: 200,
-              incomes: userMonth?.incomes.slice(0, 3),
+              incomes: sortIncomes,
               available,
               lastExpense,
               notInBudget,
