@@ -11,7 +11,7 @@
     "test": "yarn generate && jest",
     "test:watch": "yarn generate:nexus && jest --watch",
     "clean": "rm -rf dist",
-    "migrate:dev": "npx prisma migrate dev --preview-feature",
+    "migrate:dev": "npx prisma migrate dev",
     "migrate": "npx prisma migrate deploy --preview-feature",
     "generate": "yarn generate:prisma && yarn generate:nexus",
     "generate:prisma": "prisma generate",

@@ -1,4 +1,4 @@
-import { nonNull, stringArg, extendType } from 'nexus';
+import { nonNull, extendType, intArg } from 'nexus';
 
 import { checkAuth } from '../../../utils/checkAuth';
 
@@ -8,9 +8,10 @@ export const GetUserMonth = extendType({
     t.nonNull.field('getUserMonth', {
       type: 'UserMonth',
       args: {
-        month: nonNull(stringArg()),
+        month: nonNull(intArg()),
+        year: nonNull(intArg()),
       },
-      async resolve(_root, { month }, { db, req }) {
+      async resolve(_root, { month, year }, { db, req }) {
         const user: any = checkAuth(req);
         const { userId } = user;
 
@@ -26,7 +27,8 @@ export const GetUserMonth = extendType({
           const userMonth = await db.userMonth.findFirst({
             where: {
               month: {
-                date: month,
+                month,
+                year,
               },
               userId,
             },

@@ -31,7 +31,8 @@ model UserMonth {
 
 model Month {
   id          Int     @default(autoincrement()) @id
-  date        DateTime
+  month       Int
+  year        Int
   userMonths  UserMonth[]
 }
 

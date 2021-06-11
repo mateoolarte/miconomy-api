@@ -471,7 +471,8 @@ export interface NexusGenArgTypes {
     };
     getUserMonth: {
       // args
-      month: string; // String!
+      month: number; // Int!
+      year: number; // Int!
     };
     getUserMonthCategories: {
       // args

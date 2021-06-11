@@ -77,7 +77,7 @@ type Query {
   getItems(categoryId: Int!): [ItemExpense!]
   getUser(token: String!): User!
   getUserCategories: UserCategories!
-  getUserMonth(month: String!): UserMonth!
+  getUserMonth(month: Int!, year: Int!): UserMonth!
   getUserMonthCategories(userMonthId: Int!): [UserMonthCategory!]
   overviewMonth(month: String!): OverviewMonthPayload!
 }
