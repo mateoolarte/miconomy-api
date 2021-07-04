@@ -1,0 +1,12 @@
+# Local
+# DATABASE_URL="postgres://username:passwordd@localhost:5432/miconomy"
+
+# Staging
+# DATABASE_URL="postgres://gxojupuxeupjnx:c74bdbbeef46723af324bd589b6e17d3ce37fa9911f3765cf2f7c8d935bcfdb9@ec2-3-220-98-137.compute-1.amazonaws.com:5432/d7ehc5c0vp8ve0"
+
+# Production
+DATABASE_URL="postgres://qgjbrfvzfivbcd:87c6e4257bcff72bc906420142e776c3de223af5548191a501126706d53483f0@ec2-52-22-135-159.compute-1.amazonaws.com:5432/detmjpj9c7jc7a"
+
+APP_SECRET="my-secret"
+SENDGRID_API_KEY="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"
+SENDGRID_EMAIL_SENDER="admin@miconomy.co"
