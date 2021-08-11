@@ -52,11 +52,8 @@ export const GetUserMonth = extendType({
           });
 
           if (userMonth) {
-            const {
-              id,
-              userMonthCategories,
-              userMonthSavingCategory,
-            } = userMonth;
+            const { id, userMonthCategories, userMonthSavingCategory } =
+              userMonth;
 
             return {
               ...defaultResponse,

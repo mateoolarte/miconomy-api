@@ -3,8 +3,8 @@
  * Do not make changes to this file directly
  */
 
-import { Context } from './../context';
-import { core } from 'nexus';
+import type { Context } from './../context';
+import type { core } from 'nexus';
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     /**
@@ -551,6 +551,7 @@ export interface NexusGenTypes {
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {}
+  interface NexusGenPluginInputTypeConfig<TypeName extends string> {}
   interface NexusGenPluginFieldConfig<
     TypeName extends string,
     FieldName extends string

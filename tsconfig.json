@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es5",
     "lib": ["esnext"],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
+    "allowJs": true,
     "skipLibCheck": true,
-    "module": "CommonJS",
-    "resolveJsonModule": true,
-    "sourceMap": true,
     "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "outDir": "dist",
     "rootDir": "src"
   },

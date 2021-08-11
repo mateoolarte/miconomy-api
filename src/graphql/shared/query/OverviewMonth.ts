@@ -46,8 +46,8 @@ function getTotalIncome(accumulator, currentValue) {
 }
 
 function getLastExpense(result, currentValue) {
-  currentValue.items.forEach(valItem => {
-    valItem.expense.forEach(valExpense => {
+  currentValue.items.forEach((valItem) => {
+    valItem.expense.forEach((valExpense) => {
       if (result.date < valExpense.date) {
         result = valExpense;
       }
@@ -110,14 +110,16 @@ export const OverviewMonth = extendType({
           const categories = userMonth?.userMonthCategories;
           const totalExpenses = categories.reduce(getTotalExpenses, 0);
           const totalBudget = categories.reduce(getTotalBudget, 0);
-          const totalSentSavings = userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
-            getTotalSentSavings,
-            0
-          );
-          const totalNotSentSavings = userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
-            getTotalNotSentSavings,
-            0
-          );
+          const totalSentSavings =
+            userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
+              getTotalSentSavings,
+              0
+            );
+          const totalNotSentSavings =
+            userMonth?.userMonthSavingCategory?.userMonthSavingItems.reduce(
+              getTotalNotSentSavings,
+              0
+            );
           const totalIncome = userMonth?.incomes.reduce(getTotalIncome, 0);
           const available = totalIncome - totalExpenses - totalSentSavings;
           const lastExpense = categories.reduce(
