@@ -10,11 +10,7 @@
       "request": "launch",
       "protocol": "inspector",
       "program": "${workspaceRoot}/node_modules/.bin/ts-node-dev",
-      "args": [
-        "--respawn",
-        "--transpile-only",
-        "${workspaceRoot}/src/app.ts"
-      ]
-  }
+      "args": ["--respawn", "--transpile-only", "${workspaceRoot}/src/app.ts"]
+    }
   ]
 }
