@@ -11,4 +11,4 @@ coverage
 
 .cache
 
-src/generated/**
+src/libs/generated/**

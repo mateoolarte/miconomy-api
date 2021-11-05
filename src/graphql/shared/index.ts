@@ -1,5 +1,5 @@
 export { GetUser } from './query/GetUser';
-export { OverviewMonth } from './query/OverviewMonth';
+// export { OverviewMonth } from './query/OverviewMonth';
 export { GetUserCategories } from './query/GetUserCategories';
 
 export { DeleteUser } from './mutations/DeleteUser';

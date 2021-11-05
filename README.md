@@ -1,6 +1,6 @@
 # Miconomy API
 
-Here you can find the backend api. Built with Nodejs & GraphQL
+Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 
 ## Features
 
@@ -9,7 +9,7 @@ Here you can find the backend api. Built with Nodejs & GraphQL
 - Prisma: Next generation of ORM to work with DB
 - Postgres: Database provider
 - Heroku: Platform as a Service to deploy
-- Typescript: Programming language with static typings
+- Typescript: Programming language with typings
 - Jest: Test runner
 - Git hooks with Husky and Linted staged: To help checking test and formatters before a commit
 - ESLint: Validate the Typescript code style with best practices
@@ -18,7 +18,7 @@ Here you can find the backend api. Built with Nodejs & GraphQL
 ## Prerequisites
 
 - Yarn
-- NodeJS >= 15
+- NodeJS >= 16
 
 ## Installation
 
@@ -53,15 +53,25 @@ yarn start
 yarn studio
 ```
 
-### Sync and create migrations for development server
+### Sync migrations for development server
 
 ```bash
 yarn migrate:dev
 ```
 
-### Sync and create migrations for production/staging server
+**Note:** You should ensure to have the right credentials for the database on `.env` file.
 
-In this case, before run this command we should un/comment on the `.env` the right DB provider
+### Create migrations for development server
+
+```bash
+yarn migrate:dev --name NAME_OF_MIGRATION
+```
+
+**Note:** You should ensure to have the right credentials for the database on `.env` file.
+
+### Sync migrations for production/staging server
+
+In this case, before run this command we should un/comment on the `.env` the right DB provider env
 
 ```bash
 yarn migrate
@@ -101,4 +111,22 @@ yarn test
 
 ```bash
 yarn test:watch
+```
+
+### Run linter on js and ts files
+
+```bash
+yarn lint
+```
+
+### Run formatter on src folder
+
+```bash
+yarn fmt
+```
+
+### Run formatter and linter
+
+```bash
+yarn pretty
 ```

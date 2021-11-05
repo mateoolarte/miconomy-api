@@ -26,14 +26,12 @@ type DeleteUserPayload {
 }
 
 type Expense {
-  date: DateTime
   description: String
   id: Int
   value: Int
 }
 
 type Income {
-  date: DateTime
   description: String
   id: Int
   value: Int
@@ -79,7 +77,6 @@ type Query {
   getUserCategories: UserCategories!
   getUserMonth(month: Int!, year: Int!): UserMonth!
   getUserMonthCategories(userMonthId: Int!): [UserMonthCategory!]
-  overviewMonth(month: String!): OverviewMonthPayload!
 }
 
 type ResetPasswordPayload {

@@ -1,110 +1,110 @@
-import { PrismaClient } from '@prisma/client';
-import { ServerInfo } from 'apollo-server';
-import { execSync } from 'child_process';
-import getPort, { makeRange } from 'get-port';
-import { GraphQLClient } from 'graphql-request';
-import { nanoid } from 'nanoid';
-import { join } from 'path';
-import { Client } from 'pg';
-import { db } from '../db';
-import { server } from '../server';
+// import { PrismaClient } from '@prisma/client';
+// import { ServerInfo } from 'apollo-server';
+// import { execSync } from 'child_process';
+// import getPort, { makeRange } from 'get-port';
+// import { GraphQLClient } from 'graphql-request';
+// import { nanoid } from 'nanoid';
+// import { join } from 'path';
+// import { Client } from 'pg';
+// import { db } from '../db';
+// import { server } from '../server';
 
-type TestContext = {
-  client: GraphQLClient;
-  db: PrismaClient;
-};
+// type TestContext = {
+//   client: GraphQLClient;
+//   db: PrismaClient;
+// };
 
-export function createTestContext(): TestContext {
-  const ctx = {} as TestContext;
-  const graphqlCtx = graphqlTestContext();
-  const prismaCtx = prismaTestContext();
+// export function createTestContext(): TestContext {
+//   const ctx = {} as TestContext;
+//   const graphqlCtx = graphqlTestContext();
+//   const prismaCtx = prismaTestContext();
 
-  beforeEach(async () => {
-    const client = await graphqlCtx.before();
-    const db = await prismaCtx.before();
+//   beforeEach(async () => {
+//     const client = await graphqlCtx.before();
+//     const db = await prismaCtx.before();
 
-    Object.assign(ctx, {
-      client,
-      db,
-    });
-  });
+//     Object.assign(ctx, {
+//       client,
+//       db,
+//     });
+//   });
 
-  afterEach(async () => {
-    await graphqlCtx.after();
-    await prismaCtx.after();
-  });
+//   afterEach(async () => {
+//     await graphqlCtx.after();
+//     await prismaCtx.after();
+//   });
 
-  return ctx;
-}
+//   return ctx;
+// }
 
-function graphqlTestContext() {
-  let serverInstance: ServerInfo | null = null;
+// function graphqlTestContext() {
+//   let serverInstance: ServerInfo | null = null;
 
-  return {
-    async before() {
-      const port = await getPort({ port: makeRange(4000, 6000) });
+//   return {
+//     async before() {
+//       const port = await getPort({ port: makeRange(4000, 6000) });
 
-      serverInstance = await server.listen({ port });
-      serverInstance.server.on('close', async () => {
-        await db.$disconnect();
-      });
+//       serverInstance = await server.listen({ port });
+//       serverInstance.server.on('close', async () => {
+//         await db.$disconnect();
+//       });
 
-      return new GraphQLClient(`http://localhost:${port}`);
-    },
+//       return new GraphQLClient(`http://localhost:${port}`);
+//     },
 
-    async after() {
-      serverInstance?.server.close();
-    },
-  };
-}
+//     async after() {
+//       serverInstance?.server.close();
+//     },
+//   };
+// }
 
-function prismaTestContext() {
-  const prismaBinary = join(
-    __dirname,
-    '..',
-    '..',
-    'node_modules',
-    '.bin',
-    'prisma'
-  );
-  let schema = '';
-  let databaseUrl = '';
-  let prismaClient: null | PrismaClient = null;
+// function prismaTestContext() {
+//   const prismaBinary = join(
+//     __dirname,
+//     '..',
+//     '..',
+//     'node_modules',
+//     '.bin',
+//     'prisma'
+//   );
+//   let schema = '';
+//   let databaseUrl = '';
+//   let prismaClient: null | PrismaClient = null;
 
-  return {
-    async before() {
-      schema = `test_${nanoid(5)}`;
-      databaseUrl = `${process.env.DATABASE_URL}?schema=${schema}`;
-      let commandToExecute = 'migrate dev --preview-feature';
+//   return {
+//     async before() {
+//       schema = `test_${nanoid(5)}`;
+//       databaseUrl = `${process.env.DATABASE_URL}?schema=${schema}`;
+//       let commandToExecute = 'migrate dev --preview-feature';
 
-      if (process.env.NODE_ENV !== 'development') {
-        commandToExecute = 'migrate deploy --preview-feature';
-      }
+//       if (process.env.NODE_ENV !== 'development') {
+//         commandToExecute = 'migrate deploy --preview-feature';
+//       }
 
-      process.env.DATABASE_URL = databaseUrl;
-      execSync(`${prismaBinary} ${commandToExecute}`, {
-        env: {
-          ...process.env,
-          DATABASE_URL: databaseUrl,
-        },
-      });
+//       process.env.DATABASE_URL = databaseUrl;
+//       execSync(`${prismaBinary} ${commandToExecute}`, {
+//         env: {
+//           ...process.env,
+//           DATABASE_URL: databaseUrl,
+//         },
+//       });
 
-      prismaClient = new PrismaClient();
+//       prismaClient = new PrismaClient();
 
-      return prismaClient;
-    },
+//       return prismaClient;
+//     },
 
-    async after() {
-      const client = new Client({
-        connectionString: `${databaseUrl}?ssl=${
-          process.env.NODE_ENV !== 'development' ? 'true' : 'false'
-        }`,
-      });
+//     async after() {
+//       const client = new Client({
+//         connectionString: `${databaseUrl}?ssl=${
+//           process.env.NODE_ENV !== 'development' ? 'true' : 'false'
+//         }`,
+//       });
 
-      await client.connect();
-      await client.query(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`);
-      await client.end();
-      await prismaClient?.$disconnect();
-    },
-  };
-}
+//       await client.connect();
+//       await client.query(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`);
+//       await client.end();
+//       await prismaClient?.$disconnect();
+//     },
+//   };
+// }

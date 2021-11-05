@@ -5,7 +5,7 @@ export const Income = objectType({
   definition(t) {
     t.int('id');
     t.int('value');
-    t.date('date');
+    // t.date('date');
     t.string('description');
   },
 });

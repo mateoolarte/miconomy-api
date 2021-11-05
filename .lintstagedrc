@@ -1,5 +1,4 @@
 {
   "*.{js,ts}": "eslint --cache --fix",
-  "*.{js,json,ts,md,mdx,yml}": "prettier --write",
-  "*.test.{ts,js}": "yarn test"
+  "*.{js,json,ts,md,mdx,yml}": "prettier --write"
 }

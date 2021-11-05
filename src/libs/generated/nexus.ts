@@ -4,7 +4,7 @@
  */
 
 
-import type { Context } from "./../context"
+import type { Context } from "./../../config/context"
 import type { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -60,13 +60,11 @@ export interface NexusGenObjects {
     status?: string | null; // String
   }
   Expense: { // root type
-    date?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: number | null; // Int
     value?: number | null; // Int
   }
   Income: { // root type
-    date?: NexusGenScalars['DateTime'] | null; // DateTime
     description?: string | null; // String
     id?: number | null; // Int
     value?: number | null; // Int
@@ -160,13 +158,11 @@ export interface NexusGenFieldTypes {
     status: string | null; // String
   }
   Expense: { // field return type
-    date: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     id: number | null; // Int
     value: number | null; // Int
   }
   Income: { // field return type
-    date: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     id: number | null; // Int
     value: number | null; // Int
@@ -207,7 +203,6 @@ export interface NexusGenFieldTypes {
     getUserCategories: NexusGenRootTypes['UserCategories']; // UserCategories!
     getUserMonth: NexusGenRootTypes['UserMonth']; // UserMonth!
     getUserMonthCategories: NexusGenRootTypes['UserMonthCategory'][] | null; // [UserMonthCategory!]
-    overviewMonth: NexusGenRootTypes['OverviewMonthPayload']; // OverviewMonthPayload!
   }
   ResetPasswordPayload: { // field return type
     message: string | null; // String
@@ -267,13 +262,11 @@ export interface NexusGenFieldTypeNames {
     status: 'String'
   }
   Expense: { // field return type name
-    date: 'DateTime'
     description: 'String'
     id: 'Int'
     value: 'Int'
   }
   Income: { // field return type name
-    date: 'DateTime'
     description: 'String'
     id: 'Int'
     value: 'Int'
@@ -314,7 +307,6 @@ export interface NexusGenFieldTypeNames {
     getUserCategories: 'UserCategories'
     getUserMonth: 'UserMonth'
     getUserMonthCategories: 'UserMonthCategory'
-    overviewMonth: 'OverviewMonthPayload'
   }
   ResetPasswordPayload: { // field return type name
     message: 'String'
@@ -408,9 +400,6 @@ export interface NexusGenArgTypes {
     }
     getUserMonthCategories: { // args
       userMonthId: number; // Int!
-    }
-    overviewMonth: { // args
-      month: string; // String!
     }
   }
 }

@@ -6,5 +6,5 @@
 **/yarn.lock
 
 /dist/**
-/src/generated/**
+/src/libs/generated/**
 /coverage/

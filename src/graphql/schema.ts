@@ -1,15 +1,15 @@
 import { makeSchema } from 'nexus';
 
-import * as types from './graphql';
+import * as types from '.';
 
 export const schema = makeSchema({
   types,
   outputs: {
-    typegen: __dirname + '/generated/nexus.ts',
-    schema: __dirname + '/../schema.graphql',
+    typegen: __dirname + '/../libs/generated/nexus.ts',
+    schema: __dirname + '/../../schema.graphql',
   },
   contextType: {
-    module: require.resolve('./context'),
+    module: require.resolve('../config/context'),
     export: 'Context',
   },
   sourceTypes: {
