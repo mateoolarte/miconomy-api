@@ -50,6 +50,8 @@ model Income {
   description String
   entry Entry @relation(fields: [entryId], references: [id])
   entryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Saving {
@@ -62,6 +64,8 @@ model Saving {
   userId Int
   entries EntrySaving[]
   budgets SavingBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Budget {
@@ -71,6 +75,8 @@ model Budget {
   userId Int
   savings SavingBudget[]
   categories CategoryBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Category {
@@ -81,6 +87,8 @@ model Category {
   expenses Expense[]
   entries EntryCategory[]
   budgets CategoryBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Expense {
@@ -91,6 +99,8 @@ model Expense {
   categoryId Int
   entry Entry @relation(fields: [entryId], references: [id])
   entryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model EntryCategory {
