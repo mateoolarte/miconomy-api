@@ -15,6 +15,12 @@ Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 - ESLint: Validate the Typescript code style with best practices
 - Prettier: Formatter files with configured options
 
+## Used libraries
+
+- Sendgrid: Manage email sending
+- Bcrypt: Password hashing
+- JWT: JWT token
+
 ## Prerequisites
 
 - Yarn

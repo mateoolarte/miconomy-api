@@ -1,9 +1,9 @@
-import { objectType } from 'nexus';
+// import { objectType } from 'nexus';
 
-export const DeleteUserPayload = objectType({
-  name: 'DeleteUserPayload',
-  definition(t) {
-    t.string('status');
-    t.string('message');
-  },
-});
+// export const DeleteUserPayload = objectType({
+//   name: 'DeleteUserPayload',
+//   definition(t) {
+//     t.string('status');
+//     t.string('message');
+//   },
+// });

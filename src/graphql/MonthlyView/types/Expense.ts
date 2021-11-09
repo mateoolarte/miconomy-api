@@ -1,11 +1,11 @@
-import { objectType } from 'nexus';
+// import { objectType } from 'nexus';
 
-export const Expense = objectType({
-  name: 'Expense',
-  definition(t) {
-    t.int('id');
-    t.int('value');
-    t.string('description');
-    // t.date('date');
-  },
-});
+// export const Expense = objectType({
+//   name: 'Expense',
+//   definition(t) {
+//     t.int('id');
+//     t.int('value');
+//     t.string('description');
+//     t.date('date');
+//   },
+// });

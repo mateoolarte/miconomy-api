@@ -1,5 +1,4 @@
 import { makeSchema } from 'nexus';
-
 import * as types from '.';
 
 export const schema = makeSchema({

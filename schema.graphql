@@ -9,79 +9,13 @@ type AuthPayload {
   user: User
 }
 
-type Category {
-  id: Int
-  isActive: Boolean
-  name: String
-}
-
-"""
-A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
-"""
-scalar DateTime
-
-type DeleteUserPayload {
-  message: String
-  status: String
-}
-
-type Expense {
-  description: String
-  id: Int
-  value: Int
-}
-
-type Income {
-  description: String
-  id: Int
-  value: Int
-}
-
-type Item {
-  description: String
-  expense: [Expense]
-  id: Int
-  itemBudget: Int
-}
-
-type ItemExpense {
-  description: String
-  id: Int
-}
-
 type Mutation {
-  addCategory(name: String!): Category!
-  addExpense(description: String!, itemId: Int!, value: Int!): Expense!
-  addIncome(description: String!, userMonthId: Int!, value: Int!): Income!
-  addUserMonthCategory(categoryId: Int!, userMonthId: Int!): Category!
-  deleteUser(token: String!): DeleteUserPayload!
   login(email: String!, password: String!): AuthPayload!
-  resetPassword(email: String!): ResetPasswordPayload!
   signup(email: String!, password: String!): AuthPayload!
-  updatePassword(password: String!, token: String!): ResetPasswordPayload!
-}
-
-type OverviewMonthPayload {
-  available: Int
-  error: String
-  incomes: [Income]
-  lastExpense: Expense
-  notInBudget: Int
-  savings: Int
-  status: Int
 }
 
 type Query {
-  getItems(categoryId: Int!): [ItemExpense!]
-  getUser(token: String!): User!
-  getUserCategories: UserCategories!
-  getUserMonth(month: Int!, year: Int!): UserMonth!
-  getUserMonthCategories(userMonthId: Int!): [UserMonthCategory!]
-}
-
-type ResetPasswordPayload {
-  message: String
-  status: String
+  ok: Boolean!
 }
 
 type User {
@@ -89,39 +23,4 @@ type User {
   id: Int
   name: String
   password: String
-}
-
-type UserCategories {
-  categories: [Category]
-  error: String
-  status: Int
-}
-
-type UserMonth {
-  categories: [UserMonthCategory]
-  error: String
-  id: Int
-  savingCategories: UserMonthSavingCategory
-  status: Int
-}
-
-type UserMonthCategories {
-  categories: [Category]
-}
-
-type UserMonthCategory {
-  category: Category
-  id: Int
-  items: [Item]
-}
-
-type UserMonthSavingCategory {
-  id: Int
-  userMonthSavingItems: [UserMonthSavingItem]
-}
-
-type UserMonthSavingItem {
-  id: Int
-  sent: Boolean
-  value: Int
 }
