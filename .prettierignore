@@ -1,14 +1,14 @@
+.husky
+.vscode
+
+dist
 node_modules
+prisma
+src/libs/generated/**
+coverage
 
 package.json
 package-lock.json
 yarn.lock
 
-public
-dist
-build
-coverage
-
-.cache
-
-src/libs/generated/**
+schema.graphql
