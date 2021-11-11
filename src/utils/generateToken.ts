@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export function generateToken(
-  value: string | object,
+  value: { userId: string },
   expiresIn: string
 ): string {
   return jwt.sign(value, process.env.APP_SECRET, {

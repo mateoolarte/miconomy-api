@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`signup should signup a new user 1`] = `
+Object {
+  "signup": Object {
+    "message": "Se ha creado el usuario correctamente",
+    "status": 202,
+    "user": Object {
+      "email": "test1@miconomy.co",
+      "id": 1,
+    },
+  },
+}
+`;
+
+exports[`signup should signup a new user: 
+      Array [
+        Object {
+          "email": "test1@miconomy.co",
+          "id": 1,
+        },
+      ]
+     1`] = `
+Array [
+  Object {
+    "email": "test1@miconomy.co",
+    "id": 1,
+  },
+]
+`;
