@@ -9,15 +9,11 @@
 
 # misc
 .DS_Store
-*.pem
+*.env*
+.eslintcache
+package-lock.json
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# local env files
-*.env*
-
-.eslintcache
-package-lock.json
