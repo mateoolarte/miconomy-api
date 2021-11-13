@@ -1,14 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { db } from './db';
-// import { checkAuth } from '../utils/checkAuth';
+import { checkUserAuth } from '../utils/checkUserAuth';
 
 export interface Context {
   db: PrismaClient;
-  userId: string | object;
+  user: string | object;
 }
 
 export function createContext(req: object): Context {
-  // const userId = checkAuth(req);
+  const user = checkUserAuth(req);
 
-  return { db, userId: '' };
+  return { db, user };
 }
