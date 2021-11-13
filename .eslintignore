@@ -1,14 +1,13 @@
 **/.husky
 **/.vscode
 
+**/coverage/**
 **/dist/**
 **/node_modules/**
 **/prisma/**
 **/src/libs/generated/**
-**/coverage/**
 
 **/package-lock.json
 **/yarn.lock
 
-**/__tests__/**/*.ts
 **/*.d.ts

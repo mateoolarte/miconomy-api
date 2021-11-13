@@ -15,8 +15,9 @@
     "clean": "rm -rf dist",
     "test": "yarn generate:nexus && jest",
     "test:watch": "yarn generate:nexus && jest --watch",
-    "lint": "eslint src/ --ext .js,.ts,",
-    "fmt": "prettier --write ./src",
+    "test:coverage": "yarn generate:nexus && jest --coverage",
+    "lint": "eslint . --ext .js,.ts,",
+    "fmt": "prettier --write .",
     "pretty": "yarn fmt && yarn lint"
   },
   "engines": {

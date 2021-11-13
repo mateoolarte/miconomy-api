@@ -6,8 +6,8 @@ import { GraphQLClient } from 'graphql-request';
 import { nanoid } from 'nanoid';
 import { join } from 'path';
 import { Client } from 'pg';
-import { db } from '../src/config/db';
-import { server } from '../src/server';
+import { db } from '../config/db';
+import { server } from '../server';
 
 type TestContext = {
   client: GraphQLClient;
@@ -63,7 +63,14 @@ function graphqlTestContext() {
 }
 
 function prismaTestContext() {
-  const prismaBinary = join(__dirname, '..', 'node_modules', '.bin', 'prisma');
+  const prismaBinary = join(
+    __dirname,
+    '..',
+    '..',
+    'node_modules',
+    '.bin',
+    'prisma'
+  );
   let prismaClient: null | PrismaClient = null;
 
   return {
