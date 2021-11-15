@@ -1,6 +1,6 @@
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 generator client {
@@ -8,163 +8,130 @@ generator client {
 }
 
 model User {
-  id                Int     @default(autoincrement()) @id
-  email             String  @unique
-  name              String?
-  password          String
-  userMonths        UserMonth[]
-  categories        Category[]
-  savingCategories  SavingCategory[]
-  incomes           Income[]
+  id Int @default(autoincrement()) @id
+  email String @unique
+  password String
+  currencyCode String @default("COP")
+  entries Entry[]
+  savings Saving[]
+  budgets Budget[]
+  categories Category[]
 }
 
-model UserMonth {
-  id                      Int   @default(autoincrement()) @id
-  user                    User  @relation(fields: [userId], references: [id])
-  month                   Month @relation(fields: [monthId], references: [id])
-  userId                  Int
-  monthId                 Int
-  incomes                 Income[]
-  userMonthCategories     UserMonthCategory[]
-  userMonthSavingCategory UserMonthSavingCategory?
+model Entry {
+  id Int @default(autoincrement()) @id
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  month Month @relation(fields: [monthId], references: [id])
+  monthId Int
+  year Year @relation(fields: [yearId], references: [id])
+  yearId Int
+  incomes Income[]
+  expenses Expense[]
+  categories EntryCategory[]
+  savings EntrySaving[]
 }
 
 model Month {
-  id          Int     @default(autoincrement()) @id
-  month       Int
-  year        Int
-  userMonths  UserMonth[]
+  id Int @default(autoincrement()) @id
+  value Int @unique
+  entries Entry[]
+}
+
+model Year {
+  id Int @default(autoincrement()) @id
+  value Int @unique
+  entries Entry[]
 }
 
 model Income {
-  id          Int     @default(autoincrement()) @id
-  value       Int
-  date        DateTime
+  id Int @default(autoincrement()) @id
+  value Int
   description String
-  updated     DateTime?
-  user        User @relation(fields: [userId], references: [id])
-  userId      Int
-  userMonth   UserMonth @relation(fields: [userMonthId], references: [id])
-  userMonthId Int
+  entry Entry @relation(fields: [entryId], references: [id])
+  entryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
-model Category {
-  id                  Int     @default(autoincrement()) @id
-  name                String
-  isActive            Boolean
-  user                User @relation(fields: [userId], references: [id])
-  userId              Int
-  userMonthCategories UserMonthCategory[]
-  budgetCategories    BudgetCategory[]
-}
-
-model UserMonthCategory {
-  id          Int     @default(autoincrement()) @id
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  userMonth   UserMonth @relation(fields: [userMonthId], references: [id])
-  userMonthId Int
-  items       Item[]
-}
-
-model Item {
-  id                    Int     @default(autoincrement()) @id
-  description           String
-  itemBudget            Int
-  userMonthCategory     UserMonthCategory @relation(fields: [userMonthCategoryId], references: [id])
-  userMonthCategoryId   Int
-  expense               Expense[]
-}
-
-model Expense {
-  id          Int     @default(autoincrement()) @id
-  date        DateTime
-  description String?
-  value       Int
-  item        Item @relation(fields: [itemId], references: [id])
-  itemId      Int
-}
-
-model UserMonthSavingCategory {
-  id                    Int     @default(autoincrement()) @id
-  userMonth             UserMonth @relation(fields: [userMonthId], references: [id])
-  userMonthId           Int
-  userMonthSavingItems  UserMonthSavingItem[]
-}
-
-model UserMonthSavingItem {
-  id                        Int     @default(autoincrement()) @id
-  value                     Int
-  sent                      Boolean
-  userMonthSavingCategory   UserMonthSavingCategory @relation(fields: [userMonthSavingCategoryId], references: [id])
-  userMonthSavingCategoryId Int
-  savingCategory            SavingCategory @relation(fields: [savingCategoryId], references: [id])
-  savingCategoryId          Int
-}
-
-model SavingCategory {
-  id                    Int     @default(autoincrement()) @id
-  name                  String
-  target                Int?
-  value                 Int
-  archived              Boolean
-  user                  User @relation(fields: [userId], references: [id])
-  userId                Int
-  UserMonthSavingItems  UserMonthSavingItem[]
-  savingTransactions    SavingTransaction[]
-  budgetSavingItem      BudgetSavingItem[]
-}
-
-model SavingTransaction {
-  id                Int     @default(autoincrement()) @id
-  date              DateTime
-  value             Int
-  type              SavingTransactionType
-  savingCategory    SavingCategory @relation(fields: [savingCategoryId], references: [id])
-  savingCategoryId  Int
-}
-
-enum SavingTransactionType {
-  DEPOSIT
-  WITHDRAWAL
+model Saving {
+  id Int @default(autoincrement()) @id
+  name String
+  currentValue Int
+  goal Int
+  fee Int @default(0)
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  entries EntrySaving[]
+  budgets SavingBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Budget {
-  id                   Int     @default(autoincrement()) @id
-  name                 String
-  budgetCategories     BudgetCategory[]
-  budgetSavingCategory BudgetSavingCategory?
+  id Int @default(autoincrement()) @id
+  name String
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  savings SavingBudget[]
+  categories CategoryBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
-model BudgetCategory {
-  id          Int     @default(autoincrement()) @id
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  budget      Budget @relation(fields: [budgetId], references: [id])
-  budgetId    Int
-  budgetItems BudgetItem[]
+model Category {
+  id Int @default(autoincrement()) @id
+  name String
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  expenses Expense[]
+  entries EntryCategory[]
+  budgets CategoryBudget[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
-model BudgetItem {
-  id                Int     @default(autoincrement()) @id
-  description       String
-  itemBudget        Int
-  budgetCategory    BudgetCategory @relation(fields:[budgetCategoryId], references: [id])
-  budgetCategoryId  Int
+model Expense {
+  id Int @default(autoincrement()) @id
+  value Int
+  description String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  entry Entry @relation(fields: [entryId], references: [id])
+  entryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
-model BudgetSavingCategory {
-  id                Int     @default(autoincrement()) @id
-  budget            Budget @relation(fields: [budgetId], references: [id])
-  budgetId          Int
-  budgetSavingItems BudgetSavingItem[]
+model EntryCategory {
+  entry Entry @relation(fields: [entryId], references: [id])
+  entryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  @@id([entryId, categoryId])
 }
 
-model BudgetSavingItem {
-  id                      Int     @default(autoincrement()) @id
-  value                   Int
-  budgetSavingCategory    BudgetSavingCategory @relation(fields: [budgetSavingCategoryId], references: [id])
-  budgetSavingCategoryId  Int
-  savingCategory          SavingCategory @relation(fields: [savingCategoryId], references: [id])
-  savingCategoryId        Int
+model EntrySaving {
+  entry Entry @relation(fields: [entryId], references: [id])
+  entryId Int
+  saving Saving @relation(fields: [savingId], references: [id])
+  savingId Int
+  @@id([entryId, savingId])
 }
+
+model SavingBudget {
+  budget Budget @relation(fields: [budgetId], references: [id])
+  budgetId Int
+  saving Saving @relation(fields: [savingId], references: [id])
+  savingId Int
+  @@id([budgetId, savingId])
+}
+
+model CategoryBudget {
+  budget Budget @relation(fields: [budgetId], references: [id])
+  budgetId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  @@id([categoryId, budgetId])
+}
+
