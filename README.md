@@ -33,6 +33,37 @@ Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 - Create a `.env` file and ask a teammate to share the content
 - Run on terminal `yarn dev` and start rocking
 
+## File structure
+
+    .
+    ├── .husky              #
+    ├── .vscode
+    ├── prisma
+    ├── src
+    │   ├── config
+    │   ├── graphql
+    │   ├── libs
+    │   ├── tests
+    │   ├── utils
+    │   ├── app.ts
+    │   └── server.ts
+    ├── .editorconfig
+    ├── .eslintignore
+    ├── .eslintrc
+    ├── .gitignore
+    ├── .lintstagedrc
+    ├── .prettierignore
+    ├── babel.config.js
+    ├── env-example
+    ├── jest.config.js
+    ├── package.json
+    ├── prettier.config.js
+    ├── Procfile
+    ├── README.md
+    ├── schema.graphql
+    ├── tsconfig.json
+    └── yarn.lock
+
 ## Available commands
 
 ### Run development server
