@@ -3,9 +3,8 @@
 exports[`login should give access to a existing user 1`] = `
 Object {
   "signup": Object {
-    "message": "Se ha creado el usuario correctamente",
-    "status": 202,
     "user": Object {
+      "currencyCode": "COP",
       "email": "test2@miconomy.co",
       "id": 1,
     },
@@ -16,9 +15,8 @@ Object {
 exports[`login should give access to a existing user 2`] = `
 Object {
   "login": Object {
-    "message": "El usuario ha ingresado correctamente",
-    "status": 202,
     "user": Object {
+      "currencyCode": "COP",
       "email": "test2@miconomy.co",
       "id": 1,
     },

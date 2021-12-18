@@ -5,11 +5,10 @@ const ctx = createTestContext();
 const signupMutation = `
   mutation signup($email: String!, $password: String!) {
     signup(email: $email, password: $password) {
-      message
-      status
       user {
-        email
         id
+        email
+        currencyCode
       }
     }
   }
@@ -28,16 +27,10 @@ describe('signup', () => {
       select: {
         id: true,
         email: true,
+        currencyCode: true,
       },
     });
 
-    expect(users).toMatchSnapshot(`
-      Array [
-        Object {
-          "email": "test1@miconomy.co",
-          "id": 1,
-        },
-      ]
-    `);
+    expect(users).toMatchSnapshot();
   });
 });

@@ -5,11 +5,10 @@ const ctx = createTestContext();
 const signupMutation = `
   mutation signup($email: String!, $password: String!) {
     signup(email: $email, password: $password) {
-      message
-      status
       user {
-        email
         id
+        email
+        currencyCode
       }
     }
   }
@@ -18,11 +17,10 @@ const signupMutation = `
 const loginMutation = `
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      message
-      status
       user {
-        email
         id
+        email
+        currencyCode
       }
     }
   }

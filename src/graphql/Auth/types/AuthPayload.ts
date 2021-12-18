@@ -7,7 +7,5 @@ export const AuthPayload = objectType({
       type: 'User',
     });
     t.string('token');
-    t.int('status');
-    t.string('message');
   },
 });

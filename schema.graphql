@@ -3,8 +3,6 @@
 
 
 type AuthPayload {
-  message: String
-  status: Int
   token: String
   user: User
 }
@@ -19,8 +17,8 @@ type Query {
 }
 
 type User {
+  currencyCode: String
   email: String
   id: Int
-  name: String
   password: String
 }

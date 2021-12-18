@@ -29,17 +29,15 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   AuthPayload: { // root type
-    message?: string | null; // String
-    status?: number | null; // Int
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
   Query: {};
   User: { // root type
+    currencyCode?: string | null; // String
     email?: string | null; // String
     id?: number | null; // Int
-    name?: string | null; // String
     password?: string | null; // String
   }
 }
@@ -56,8 +54,6 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   AuthPayload: { // field return type
-    message: string | null; // String
-    status: number | null; // Int
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
@@ -69,17 +65,15 @@ export interface NexusGenFieldTypes {
     ok: boolean; // Boolean!
   }
   User: { // field return type
+    currencyCode: string | null; // String
     email: string | null; // String
     id: number | null; // Int
-    name: string | null; // String
     password: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
   AuthPayload: { // field return type name
-    message: 'String'
-    status: 'Int'
     token: 'String'
     user: 'User'
   }
@@ -91,9 +85,9 @@ export interface NexusGenFieldTypeNames {
     ok: 'Boolean'
   }
   User: { // field return type name
+    currencyCode: 'String'
     email: 'String'
     id: 'Int'
-    name: 'String'
     password: 'String'
   }
 }
