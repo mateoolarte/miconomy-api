@@ -7,13 +7,20 @@ type AuthPayload {
   user: User
 }
 
+type Category {
+  id: Int
+  name: String
+}
+
 type Mutation {
+  createCategory(name: String!): Category!
   login(email: String!, password: String!): AuthPayload!
   signup(email: String!, password: String!): AuthPayload!
+  updateCategory(id: Int!, name: String!): Category!
 }
 
 type Query {
-  ok: Boolean!
+  categories: [Category!]
 }
 
 type User {

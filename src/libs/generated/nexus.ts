@@ -32,6 +32,10 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Category: { // root type
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -57,12 +61,18 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Category: { // field return type
+    id: number | null; // Int
+    name: string | null; // String
+  }
   Mutation: { // field return type
+    createCategory: NexusGenRootTypes['Category']; // Category!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    updateCategory: NexusGenRootTypes['Category']; // Category!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    categories: NexusGenRootTypes['Category'][] | null; // [Category!]
   }
   User: { // field return type
     currencyCode: string | null; // String
@@ -77,12 +87,18 @@ export interface NexusGenFieldTypeNames {
     token: 'String'
     user: 'User'
   }
+  Category: { // field return type name
+    id: 'Int'
+    name: 'String'
+  }
   Mutation: { // field return type name
+    createCategory: 'Category'
     login: 'AuthPayload'
     signup: 'AuthPayload'
+    updateCategory: 'Category'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    categories: 'Category'
   }
   User: { // field return type name
     currencyCode: 'String'
@@ -94,6 +110,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createCategory: { // args
+      name: string; // String!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
@@ -101,6 +120,10 @@ export interface NexusGenArgTypes {
     signup: { // args
       email: string; // String!
       password: string; // String!
+    }
+    updateCategory: { // args
+      id: number; // Int!
+      name: string; // String!
     }
   }
 }
