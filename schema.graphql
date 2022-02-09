@@ -14,13 +14,26 @@ type Category {
 
 type Mutation {
   createCategory(name: String!): Category!
+  createSaving(goal: Int!, name: String!, type: String, value: Int): Saving!
+  deleteSaving(id: Int!): Saving!
   login(email: String!, password: String!): AuthPayload!
   signup(email: String!, password: String!): AuthPayload!
   updateCategory(id: Int!, name: String!): Category!
+  updateSaving(goal: Int!, id: Int!, name: String!, value: Int!): Saving!
 }
 
 type Query {
   categories: [Category!]
+  savings: [Saving!]
+}
+
+type Saving {
+  fee: Int
+  goal: Int
+  id: Int
+  name: String
+  type: String
+  value: Int
 }
 
 type User {

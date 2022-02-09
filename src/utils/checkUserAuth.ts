@@ -1,19 +1,5 @@
-import jwt from 'jsonwebtoken';
+import { AuthenticationError } from 'apollo-server';
 
-export function checkUserAuth(req) {
-  const authorizationHeader = req.headers.authorization || '';
-
-  if (!authorizationHeader) {
-    return null;
-  }
-
-  const token = authorizationHeader.replace('Bearer ', '');
-
-  try {
-    const verifyToken = jwt.verify(token, process.env.APP_SECRET);
-
-    return verifyToken;
-  } catch (error) {
-    throw new Error('El token ingresado no es válido');
-  }
+export function checkUserAuth(user) {
+  if (!user) throw new AuthenticationError('No has iniciado sesión');
 }

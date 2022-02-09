@@ -1,9 +1,7 @@
-import { AuthenticationError } from 'apollo-server';
+import { checkUserAuth } from '../../../utils/checkUserAuth';
 
 export async function updateCategoryResolver(db, user, args) {
-  if (!user) {
-    throw new AuthenticationError('No has iniciado sesión');
-  }
+  checkUserAuth(user);
 
   const { id, name } = args;
 

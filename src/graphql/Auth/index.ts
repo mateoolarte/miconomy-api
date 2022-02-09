@@ -1,3 +1,3 @@
-export { login, signup } from './mutations';
+export * from './mutations';
 
 export { AuthPayload } from './types/AuthPayload';

@@ -1,4 +1,4 @@
-import { createTestContext } from '../../../tests/__helpers';
+import { createTestContext } from '../../../utils/testHelpers';
 
 const ctx = createTestContext();
 

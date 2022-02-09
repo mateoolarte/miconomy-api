@@ -38,6 +38,14 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  Saving: { // root type
+    fee?: number | null; // Int
+    goal?: number | null; // Int
+    id?: number | null; // Int
+    name?: string | null; // String
+    type?: string | null; // String
+    value?: number | null; // Int
+  }
   User: { // root type
     currencyCode?: string | null; // String
     email?: string | null; // String
@@ -67,12 +75,24 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createCategory: NexusGenRootTypes['Category']; // Category!
+    createSaving: NexusGenRootTypes['Saving']; // Saving!
+    deleteSaving: NexusGenRootTypes['Saving']; // Saving!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateCategory: NexusGenRootTypes['Category']; // Category!
+    updateSaving: NexusGenRootTypes['Saving']; // Saving!
   }
   Query: { // field return type
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
+    savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
+  }
+  Saving: { // field return type
+    fee: number | null; // Int
+    goal: number | null; // Int
+    id: number | null; // Int
+    name: string | null; // String
+    type: string | null; // String
+    value: number | null; // Int
   }
   User: { // field return type
     currencyCode: string | null; // String
@@ -93,12 +113,24 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createCategory: 'Category'
+    createSaving: 'Saving'
+    deleteSaving: 'Saving'
     login: 'AuthPayload'
     signup: 'AuthPayload'
     updateCategory: 'Category'
+    updateSaving: 'Saving'
   }
   Query: { // field return type name
     categories: 'Category'
+    savings: 'Saving'
+  }
+  Saving: { // field return type name
+    fee: 'Int'
+    goal: 'Int'
+    id: 'Int'
+    name: 'String'
+    type: 'String'
+    value: 'Int'
   }
   User: { // field return type name
     currencyCode: 'String'
@@ -113,6 +145,15 @@ export interface NexusGenArgTypes {
     createCategory: { // args
       name: string; // String!
     }
+    createSaving: { // args
+      goal: number; // Int!
+      name: string; // String!
+      type?: string | null; // String
+      value?: number | null; // Int
+    }
+    deleteSaving: { // args
+      id: number; // Int!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
@@ -124,6 +165,12 @@ export interface NexusGenArgTypes {
     updateCategory: { // args
       id: number; // Int!
       name: string; // String!
+    }
+    updateSaving: { // args
+      goal: number; // Int!
+      id: number; // Int!
+      name: string; // String!
+      value: number; // Int!
     }
   }
 }

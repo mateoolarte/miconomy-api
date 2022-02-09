@@ -1,16 +1,14 @@
-import { AuthenticationError } from 'apollo-server';
+import { checkUserAuth } from '../../../utils/checkUserAuth';
 
 export async function createCategoryResolver(db, user, args) {
-  if (!user) {
-    throw new AuthenticationError('No has iniciado sesión');
-  }
+  checkUserAuth(user);
 
   const { name } = args;
 
   const createdCategory = await db.category.create({
     data: {
-      name,
       userId: user?.userId,
+      name,
     },
     select: {
       id: true,

@@ -1,17 +1,21 @@
 import { checkUserAuth } from '../../../utils/checkUserAuth';
 
-export async function categoriesResolver(db, user) {
+export async function savingsResolver(db, user) {
   checkUserAuth(user);
 
-  const categories = await db.category.findMany({
+  const savings = await db.saving.findMany({
     where: {
       userId: user?.userId,
     },
     select: {
       id: true,
       name: true,
+      value: true,
+      goal: true,
+      fee: true,
+      type: true,
     },
   });
 
-  return categories;
+  return savings;
 }
