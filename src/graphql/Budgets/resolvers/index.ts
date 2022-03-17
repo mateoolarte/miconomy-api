@@ -1,4 +1,5 @@
 import { budgetsResolver } from './budgets';
+import { budgetResolver } from './budget';
 import { updateBudgetResolver } from './updateBudget';
 import { createBudgetResolver } from './createBudget';
 
@@ -12,6 +13,7 @@ import { deleteSavingBudgetResolver } from './deleteSavingBudget';
 
 export const Budget = {
   getBudgets: budgetsResolver,
+  getBudget: budgetResolver,
   updateBudget: updateBudgetResolver,
   createBudget: createBudgetResolver,
   createCategoryBudget: createCategoryBudgetResolver,

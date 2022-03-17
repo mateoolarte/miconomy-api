@@ -7,3 +7,13 @@ export const budgets = queryField('budgets', {
     return Budget.getBudgets(db, user);
   },
 });
+
+export const budget = queryField('budget', {
+  type: nonNull('Budget'),
+  args: {
+    id: nonNull('Int'),
+  },
+  async resolve(_root, args, { db, user }) {
+    return Budget.getBudget(db, user, args);
+  },
+});

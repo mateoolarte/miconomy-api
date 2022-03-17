@@ -118,6 +118,7 @@ export interface NexusGenFieldTypes {
     updateSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
   }
   Query: { // field return type
+    budget: NexusGenRootTypes['Budget']; // Budget!
     budgets: NexusGenRootTypes['Budget'][] | null; // [Budget!]
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
     savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
@@ -181,6 +182,7 @@ export interface NexusGenFieldTypeNames {
     updateSavingBudget: 'SavingBudget'
   }
   Query: { // field return type name
+    budget: 'Budget'
     budgets: 'Budget'
     categories: 'Category'
     savings: 'Saving'
@@ -272,6 +274,11 @@ export interface NexusGenArgTypes {
       budgetId: number; // Int!
       fee: number; // Int!
       savingId: number; // Int!
+    }
+  }
+  Query: {
+    budget: { // args
+      id: number; // Int!
     }
   }
 }
