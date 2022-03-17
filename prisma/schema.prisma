@@ -125,6 +125,7 @@ model SavingBudget {
   budgetId Int
   saving Saving @relation(fields: [savingId], references: [id])
   savingId Int
+  fee Int @default(0)
   @@id([budgetId, savingId])
 }
 
@@ -133,6 +134,7 @@ model CategoryBudget {
   budgetId Int
   category Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+  amount Int @default(0)
   @@id([categoryId, budgetId])
 }
 

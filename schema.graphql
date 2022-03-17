@@ -7,22 +7,44 @@ type AuthPayload {
   user: User
 }
 
+type Budget {
+  categories: [CategoryBudget]
+  id: Int
+  name: String
+  savings: [SavingBudget]
+}
+
 type Category {
   id: Int
   name: String
 }
 
+type CategoryBudget {
+  amount: Int
+  id: Int
+  name: String
+}
+
 type Mutation {
+  createBudget(name: String!): Budget!
   createCategory(name: String!): Category!
+  createCategoryBudget(amount: Int!, budgetId: Int!, categoryId: Int!): CategoryBudget!
   createSaving(goal: Int!, name: String!, type: String, value: Int): Saving!
+  createSavingBudget(budgetId: Int!, fee: Int!, savingId: Int!): SavingBudget!
+  deleteCategoryBudget(budgetId: Int!, categoryId: Int!): CategoryBudget!
   deleteSaving(id: Int!): Saving!
+  deleteSavingBudget(budgetId: Int!, savingId: Int!): SavingBudget!
   login(email: String!, password: String!): AuthPayload!
   signup(email: String!, password: String!): AuthPayload!
+  updateBudget(id: Int!, name: String!): Budget!
   updateCategory(id: Int!, name: String!): Category!
+  updateCategoryBudget(amount: Int!, budgetId: Int!, categoryId: Int!): CategoryBudget!
   updateSaving(goal: Int!, id: Int!, name: String!, value: Int!): Saving!
+  updateSavingBudget(budgetId: Int!, fee: Int!, savingId: Int!): SavingBudget!
 }
 
 type Query {
+  budgets: [Budget!]
   categories: [Category!]
   savings: [Saving!]
 }
@@ -34,6 +56,12 @@ type Saving {
   name: String
   type: String
   value: Int
+}
+
+type SavingBudget {
+  fee: Int
+  id: Int
+  name: String
 }
 
 type User {

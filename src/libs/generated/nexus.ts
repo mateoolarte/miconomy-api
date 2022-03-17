@@ -32,7 +32,18 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Budget: { // root type
+    categories?: Array<NexusGenRootTypes['CategoryBudget'] | null> | null; // [CategoryBudget]
+    id?: number | null; // Int
+    name?: string | null; // String
+    savings?: Array<NexusGenRootTypes['SavingBudget'] | null> | null; // [SavingBudget]
+  }
   Category: { // root type
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
+  CategoryBudget: { // root type
+    amount?: number | null; // Int
     id?: number | null; // Int
     name?: string | null; // String
   }
@@ -45,6 +56,11 @@ export interface NexusGenObjects {
     name?: string | null; // String
     type?: string | null; // String
     value?: number | null; // Int
+  }
+  SavingBudget: { // root type
+    fee?: number | null; // Int
+    id?: number | null; // Int
+    name?: string | null; // String
   }
   User: { // root type
     currencyCode?: string | null; // String
@@ -69,20 +85,40 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Budget: { // field return type
+    categories: Array<NexusGenRootTypes['CategoryBudget'] | null> | null; // [CategoryBudget]
+    id: number | null; // Int
+    name: string | null; // String
+    savings: Array<NexusGenRootTypes['SavingBudget'] | null> | null; // [SavingBudget]
+  }
   Category: { // field return type
     id: number | null; // Int
     name: string | null; // String
   }
+  CategoryBudget: { // field return type
+    amount: number | null; // Int
+    id: number | null; // Int
+    name: string | null; // String
+  }
   Mutation: { // field return type
+    createBudget: NexusGenRootTypes['Budget']; // Budget!
     createCategory: NexusGenRootTypes['Category']; // Category!
+    createCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
     createSaving: NexusGenRootTypes['Saving']; // Saving!
+    createSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
+    deleteCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
     deleteSaving: NexusGenRootTypes['Saving']; // Saving!
+    deleteSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    updateBudget: NexusGenRootTypes['Budget']; // Budget!
     updateCategory: NexusGenRootTypes['Category']; // Category!
+    updateCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
     updateSaving: NexusGenRootTypes['Saving']; // Saving!
+    updateSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
   }
   Query: { // field return type
+    budgets: NexusGenRootTypes['Budget'][] | null; // [Budget!]
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
     savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
   }
@@ -93,6 +129,11 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
     type: string | null; // String
     value: number | null; // Int
+  }
+  SavingBudget: { // field return type
+    fee: number | null; // Int
+    id: number | null; // Int
+    name: string | null; // String
   }
   User: { // field return type
     currencyCode: string | null; // String
@@ -107,20 +148,40 @@ export interface NexusGenFieldTypeNames {
     token: 'String'
     user: 'User'
   }
+  Budget: { // field return type name
+    categories: 'CategoryBudget'
+    id: 'Int'
+    name: 'String'
+    savings: 'SavingBudget'
+  }
   Category: { // field return type name
     id: 'Int'
     name: 'String'
   }
+  CategoryBudget: { // field return type name
+    amount: 'Int'
+    id: 'Int'
+    name: 'String'
+  }
   Mutation: { // field return type name
+    createBudget: 'Budget'
     createCategory: 'Category'
+    createCategoryBudget: 'CategoryBudget'
     createSaving: 'Saving'
+    createSavingBudget: 'SavingBudget'
+    deleteCategoryBudget: 'CategoryBudget'
     deleteSaving: 'Saving'
+    deleteSavingBudget: 'SavingBudget'
     login: 'AuthPayload'
     signup: 'AuthPayload'
+    updateBudget: 'Budget'
     updateCategory: 'Category'
+    updateCategoryBudget: 'CategoryBudget'
     updateSaving: 'Saving'
+    updateSavingBudget: 'SavingBudget'
   }
   Query: { // field return type name
+    budgets: 'Budget'
     categories: 'Category'
     savings: 'Saving'
   }
@@ -132,6 +193,11 @@ export interface NexusGenFieldTypeNames {
     type: 'String'
     value: 'Int'
   }
+  SavingBudget: { // field return type name
+    fee: 'Int'
+    id: 'Int'
+    name: 'String'
+  }
   User: { // field return type name
     currencyCode: 'String'
     email: 'String'
@@ -142,8 +208,16 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createBudget: { // args
+      name: string; // String!
+    }
     createCategory: { // args
       name: string; // String!
+    }
+    createCategoryBudget: { // args
+      amount: number; // Int!
+      budgetId: number; // Int!
+      categoryId: number; // Int!
     }
     createSaving: { // args
       goal: number; // Int!
@@ -151,8 +225,21 @@ export interface NexusGenArgTypes {
       type?: string | null; // String
       value?: number | null; // Int
     }
+    createSavingBudget: { // args
+      budgetId: number; // Int!
+      fee: number; // Int!
+      savingId: number; // Int!
+    }
+    deleteCategoryBudget: { // args
+      budgetId: number; // Int!
+      categoryId: number; // Int!
+    }
     deleteSaving: { // args
       id: number; // Int!
+    }
+    deleteSavingBudget: { // args
+      budgetId: number; // Int!
+      savingId: number; // Int!
     }
     login: { // args
       email: string; // String!
@@ -162,15 +249,29 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
     }
+    updateBudget: { // args
+      id: number; // Int!
+      name: string; // String!
+    }
     updateCategory: { // args
       id: number; // Int!
       name: string; // String!
+    }
+    updateCategoryBudget: { // args
+      amount: number; // Int!
+      budgetId: number; // Int!
+      categoryId: number; // Int!
     }
     updateSaving: { // args
       goal: number; // Int!
       id: number; // Int!
       name: string; // String!
       value: number; // Int!
+    }
+    updateSavingBudget: { // args
+      budgetId: number; // Int!
+      fee: number; // Int!
+      savingId: number; // Int!
     }
   }
 }
