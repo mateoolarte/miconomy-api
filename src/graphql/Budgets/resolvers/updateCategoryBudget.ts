@@ -1,6 +1,6 @@
 import { checkUserAuth } from '../../../utils/checkUserAuth';
 
-import { getCategory } from '../utils/getCategory';
+import { getCategory } from '../../shared/utils/getCategory';
 
 export async function updateCategoryBudgetResolver(db, user, args) {
   checkUserAuth(user);

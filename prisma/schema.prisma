@@ -109,6 +109,7 @@ model EntryCategory {
   entryId Int
   category Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+  amount Int @default(0)
   @@id([entryId, categoryId])
 }
 

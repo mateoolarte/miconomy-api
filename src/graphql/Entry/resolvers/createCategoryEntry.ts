@@ -2,23 +2,24 @@ import { checkUserAuth } from '../../../utils/checkUserAuth';
 
 import { getCategory } from '../../shared/utils/getCategory';
 
-export async function createCategoryBudgetResolver(db, user, args) {
+export async function createCategoryEntryResolver(db, user, args) {
   checkUserAuth(user);
 
-  const { budgetId, categoryId, amount } = args;
+  const { entryId, categoryId, amount } = args;
 
-  await db.categoryBudget.create({
+  await db.entryCategory.create({
     data: {
-      budgetId,
+      entryId,
       categoryId,
       amount,
     },
   });
   const category = await getCategory(categoryId, db);
-  const createdCategoryBudget = {
+  const createdCategoryEntry = {
     ...category,
     amount,
+    expenses: [],
   };
 
-  return createdCategoryBudget;
+  return createdCategoryEntry;
 }

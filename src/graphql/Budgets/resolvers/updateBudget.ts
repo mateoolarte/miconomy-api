@@ -1,6 +1,6 @@
 import { checkUserAuth } from '../../../utils/checkUserAuth';
 
-import { parseCategories } from '../utils/parseCategories';
+import { parseBudgetCategories } from '../../shared/utils/parseBudgetCategories';
 import { parseSavings } from '../utils/parseSavings';
 
 export async function updateBudgetResolver(db, user, args) {
@@ -25,7 +25,7 @@ export async function updateBudgetResolver(db, user, args) {
   const getCategories = updatedBudget.categories;
   const getSavings = updatedBudget.savings;
   const categories = getCategories.map(async (item) =>
-    parseCategories(item, db)
+    parseBudgetCategories(item, db)
   );
   const savings = getSavings.map(async (item) => parseSavings(item, db));
   const budget = {

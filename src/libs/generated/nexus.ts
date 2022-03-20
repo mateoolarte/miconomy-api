@@ -47,6 +47,26 @@ export interface NexusGenObjects {
     id?: number | null; // Int
     name?: string | null; // String
   }
+  CategoryEntry: { // root type
+    amount?: number | null; // Int
+    expenses?: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
+  Entry: { // root type
+    categories?: Array<NexusGenRootTypes['CategoryEntry'] | null> | null; // [CategoryEntry]
+    id?: number | null; // Int
+  }
+  Expense: { // root type
+    description?: string | null; // String
+    id?: number | null; // Int
+    updatedAt?: string | null; // String
+    value?: number | null; // Int
+  }
+  Income: { // root type
+    id?: number | null; // Int
+    value?: number | null; // Int
+  }
   Mutation: {};
   Query: {};
   Saving: { // root type
@@ -100,10 +120,34 @@ export interface NexusGenFieldTypes {
     id: number | null; // Int
     name: string | null; // String
   }
+  CategoryEntry: { // field return type
+    amount: number | null; // Int
+    expenses: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    id: number | null; // Int
+    name: string | null; // String
+  }
+  Entry: { // field return type
+    categories: Array<NexusGenRootTypes['CategoryEntry'] | null> | null; // [CategoryEntry]
+    id: number | null; // Int
+  }
+  Expense: { // field return type
+    description: string | null; // String
+    id: number | null; // Int
+    updatedAt: string | null; // String
+    value: number | null; // Int
+  }
+  Income: { // field return type
+    id: number | null; // Int
+    value: number | null; // Int
+  }
   Mutation: { // field return type
     createBudget: NexusGenRootTypes['Budget']; // Budget!
     createCategory: NexusGenRootTypes['Category']; // Category!
     createCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
+    createCategoryEntry: NexusGenRootTypes['CategoryEntry']; // CategoryEntry!
+    createEntry: NexusGenRootTypes['Entry']; // Entry!
+    createExpense: NexusGenRootTypes['Expense']; // Expense!
+    createIncome: NexusGenRootTypes['Income']; // Income!
     createSaving: NexusGenRootTypes['Saving']; // Saving!
     createSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
     deleteCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
@@ -121,6 +165,7 @@ export interface NexusGenFieldTypes {
     budget: NexusGenRootTypes['Budget']; // Budget!
     budgets: NexusGenRootTypes['Budget'][] | null; // [Budget!]
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
+    entry: NexusGenRootTypes['Entry']; // Entry!
     savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
   }
   Saving: { // field return type
@@ -164,10 +209,34 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
   }
+  CategoryEntry: { // field return type name
+    amount: 'Int'
+    expenses: 'Expense'
+    id: 'Int'
+    name: 'String'
+  }
+  Entry: { // field return type name
+    categories: 'CategoryEntry'
+    id: 'Int'
+  }
+  Expense: { // field return type name
+    description: 'String'
+    id: 'Int'
+    updatedAt: 'String'
+    value: 'Int'
+  }
+  Income: { // field return type name
+    id: 'Int'
+    value: 'Int'
+  }
   Mutation: { // field return type name
     createBudget: 'Budget'
     createCategory: 'Category'
     createCategoryBudget: 'CategoryBudget'
+    createCategoryEntry: 'CategoryEntry'
+    createEntry: 'Entry'
+    createExpense: 'Expense'
+    createIncome: 'Income'
     createSaving: 'Saving'
     createSavingBudget: 'SavingBudget'
     deleteCategoryBudget: 'CategoryBudget'
@@ -185,6 +254,7 @@ export interface NexusGenFieldTypeNames {
     budget: 'Budget'
     budgets: 'Budget'
     categories: 'Category'
+    entry: 'Entry'
     savings: 'Saving'
   }
   Saving: { // field return type name
@@ -220,6 +290,27 @@ export interface NexusGenArgTypes {
       amount: number; // Int!
       budgetId: number; // Int!
       categoryId: number; // Int!
+    }
+    createCategoryEntry: { // args
+      amount: number; // Int!
+      categoryId: number; // Int!
+      entryId: number; // Int!
+    }
+    createEntry: { // args
+      budgetId: number; // Int!
+      month: number; // Int!
+      year: number; // Int!
+    }
+    createExpense: { // args
+      categoryId: number; // Int!
+      description: string; // String!
+      entryId: number; // Int!
+      value: number; // Int!
+    }
+    createIncome: { // args
+      description: string; // String!
+      entryId: number; // Int!
+      value: number; // Int!
     }
     createSaving: { // args
       goal: number; // Int!
@@ -279,6 +370,10 @@ export interface NexusGenArgTypes {
   Query: {
     budget: { // args
       id: number; // Int!
+    }
+    entry: { // args
+      month: number; // Int!
+      year: number; // Int!
     }
   }
 }

@@ -25,10 +25,38 @@ type CategoryBudget {
   name: String
 }
 
+type CategoryEntry {
+  amount: Int
+  expenses: [Expense]
+  id: Int
+  name: String
+}
+
+type Entry {
+  categories: [CategoryEntry]
+  id: Int
+}
+
+type Expense {
+  description: String
+  id: Int
+  updatedAt: String
+  value: Int
+}
+
+type Income {
+  id: Int
+  value: Int
+}
+
 type Mutation {
   createBudget(name: String!): Budget!
   createCategory(name: String!): Category!
   createCategoryBudget(amount: Int!, budgetId: Int!, categoryId: Int!): CategoryBudget!
+  createCategoryEntry(amount: Int!, categoryId: Int!, entryId: Int!): CategoryEntry!
+  createEntry(budgetId: Int!, month: Int!, year: Int!): Entry!
+  createExpense(categoryId: Int!, description: String!, entryId: Int!, value: Int!): Expense!
+  createIncome(description: String!, entryId: Int!, value: Int!): Income!
   createSaving(goal: Int!, name: String!, type: String, value: Int): Saving!
   createSavingBudget(budgetId: Int!, fee: Int!, savingId: Int!): SavingBudget!
   deleteCategoryBudget(budgetId: Int!, categoryId: Int!): CategoryBudget!
@@ -47,6 +75,7 @@ type Query {
   budget(id: Int!): Budget!
   budgets: [Budget!]
   categories: [Category!]
+  entry(month: Int!, year: Int!): Entry!
   savings: [Saving!]
 }
 
