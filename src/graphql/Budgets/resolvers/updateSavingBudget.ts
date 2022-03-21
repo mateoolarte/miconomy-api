@@ -1,6 +1,6 @@
 import { checkUserAuth } from '../../../utils/checkUserAuth';
 
-import { getSaving } from '../utils/getSaving';
+import { getSaving } from '../../shared/utils/getSaving';
 
 export async function updateSavingBudgetResolver(db, user, args) {
   checkUserAuth(user);

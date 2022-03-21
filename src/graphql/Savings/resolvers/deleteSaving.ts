@@ -14,7 +14,6 @@ export async function deleteSavingResolver(db, user, args) {
       name: true,
       value: true,
       goal: true,
-      fee: true,
       type: true,
     },
   });

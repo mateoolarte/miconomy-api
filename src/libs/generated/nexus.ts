@@ -56,6 +56,7 @@ export interface NexusGenObjects {
   Entry: { // root type
     categories?: Array<NexusGenRootTypes['CategoryEntry'] | null> | null; // [CategoryEntry]
     id?: number | null; // Int
+    savings?: Array<NexusGenRootTypes['SavingEntry'] | null> | null; // [SavingEntry]
   }
   Expense: { // root type
     description?: string | null; // String
@@ -70,7 +71,6 @@ export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   Saving: { // root type
-    fee?: number | null; // Int
     goal?: number | null; // Int
     id?: number | null; // Int
     name?: string | null; // String
@@ -81,6 +81,14 @@ export interface NexusGenObjects {
     fee?: number | null; // Int
     id?: number | null; // Int
     name?: string | null; // String
+    type?: string | null; // String
+  }
+  SavingEntry: { // root type
+    fee?: number | null; // Int
+    id?: number | null; // Int
+    name?: string | null; // String
+    sent?: boolean | null; // Boolean
+    type?: string | null; // String
   }
   User: { // root type
     currencyCode?: string | null; // String
@@ -129,6 +137,7 @@ export interface NexusGenFieldTypes {
   Entry: { // field return type
     categories: Array<NexusGenRootTypes['CategoryEntry'] | null> | null; // [CategoryEntry]
     id: number | null; // Int
+    savings: Array<NexusGenRootTypes['SavingEntry'] | null> | null; // [SavingEntry]
   }
   Expense: { // field return type
     description: string | null; // String
@@ -154,6 +163,7 @@ export interface NexusGenFieldTypes {
     deleteSaving: NexusGenRootTypes['Saving']; // Saving!
     deleteSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    sendSaving: NexusGenRootTypes['Saving']; // Saving!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateBudget: NexusGenRootTypes['Budget']; // Budget!
     updateCategory: NexusGenRootTypes['Category']; // Category!
@@ -169,7 +179,6 @@ export interface NexusGenFieldTypes {
     savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
   }
   Saving: { // field return type
-    fee: number | null; // Int
     goal: number | null; // Int
     id: number | null; // Int
     name: string | null; // String
@@ -180,6 +189,14 @@ export interface NexusGenFieldTypes {
     fee: number | null; // Int
     id: number | null; // Int
     name: string | null; // String
+    type: string | null; // String
+  }
+  SavingEntry: { // field return type
+    fee: number | null; // Int
+    id: number | null; // Int
+    name: string | null; // String
+    sent: boolean | null; // Boolean
+    type: string | null; // String
   }
   User: { // field return type
     currencyCode: string | null; // String
@@ -218,6 +235,7 @@ export interface NexusGenFieldTypeNames {
   Entry: { // field return type name
     categories: 'CategoryEntry'
     id: 'Int'
+    savings: 'SavingEntry'
   }
   Expense: { // field return type name
     description: 'String'
@@ -243,6 +261,7 @@ export interface NexusGenFieldTypeNames {
     deleteSaving: 'Saving'
     deleteSavingBudget: 'SavingBudget'
     login: 'AuthPayload'
+    sendSaving: 'Saving'
     signup: 'AuthPayload'
     updateBudget: 'Budget'
     updateCategory: 'Category'
@@ -258,7 +277,6 @@ export interface NexusGenFieldTypeNames {
     savings: 'Saving'
   }
   Saving: { // field return type name
-    fee: 'Int'
     goal: 'Int'
     id: 'Int'
     name: 'String'
@@ -269,6 +287,14 @@ export interface NexusGenFieldTypeNames {
     fee: 'Int'
     id: 'Int'
     name: 'String'
+    type: 'String'
+  }
+  SavingEntry: { // field return type name
+    fee: 'Int'
+    id: 'Int'
+    name: 'String'
+    sent: 'Boolean'
+    type: 'String'
   }
   User: { // field return type name
     currencyCode: 'String'
@@ -337,6 +363,11 @@ export interface NexusGenArgTypes {
     login: { // args
       email: string; // String!
       password: string; // String!
+    }
+    sendSaving: { // args
+      entryId: number; // Int!
+      id: number; // Int!
+      value: number; // Int!
     }
     signup: { // args
       email: string; // String!

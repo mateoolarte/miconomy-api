@@ -59,7 +59,6 @@ model Saving {
   name String
   value Int
   goal Int
-  fee Int @default(0)
   type String @default("saving")
   user User @relation(fields: [userId], references: [id])
   userId Int
@@ -118,6 +117,8 @@ model EntrySaving {
   entryId Int
   saving Saving @relation(fields: [savingId], references: [id])
   savingId Int
+  fee Int @default(0)
+  sent Boolean @default(false)
   @@id([entryId, savingId])
 }
 

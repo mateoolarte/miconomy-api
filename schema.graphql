@@ -35,6 +35,7 @@ type CategoryEntry {
 type Entry {
   categories: [CategoryEntry]
   id: Int
+  savings: [SavingEntry]
 }
 
 type Expense {
@@ -63,6 +64,7 @@ type Mutation {
   deleteSaving(id: Int!): Saving!
   deleteSavingBudget(budgetId: Int!, savingId: Int!): SavingBudget!
   login(email: String!, password: String!): AuthPayload!
+  sendSaving(entryId: Int!, id: Int!, value: Int!): Saving!
   signup(email: String!, password: String!): AuthPayload!
   updateBudget(id: Int!, name: String!): Budget!
   updateCategory(id: Int!, name: String!): Category!
@@ -80,7 +82,6 @@ type Query {
 }
 
 type Saving {
-  fee: Int
   goal: Int
   id: Int
   name: String
@@ -92,6 +93,15 @@ type SavingBudget {
   fee: Int
   id: Int
   name: String
+  type: String
+}
+
+type SavingEntry {
+  fee: Int
+  id: Int
+  name: String
+  sent: Boolean
+  type: String
 }
 
 type User {

@@ -7,5 +7,8 @@ export const Entry = objectType({
     t.list.field('categories', {
       type: 'CategoryEntry',
     });
+    t.list.field('savings', {
+      type: 'SavingEntry',
+    });
   },
 });

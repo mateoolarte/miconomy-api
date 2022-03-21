@@ -6,6 +6,7 @@ export function getSaving(id, db) {
     select: {
       id: true,
       name: true,
+      type: true,
     },
   });
 }

@@ -7,7 +7,6 @@ export const Saving = objectType({
     t.string('name');
     t.int('value');
     t.int('goal');
-    t.int('fee');
     t.string('type');
   },
 });

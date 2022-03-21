@@ -36,3 +36,15 @@ export const deleteSaving = mutationField('deleteSaving', {
     return Saving.deleteSaving(db, user, args);
   },
 });
+
+export const sendSaving = mutationField('sendSaving', {
+  type: nonNull('Saving'),
+  args: {
+    id: nonNull('Int'),
+    value: nonNull('Int'),
+    entryId: nonNull('Int'),
+  },
+  async resolve(_root, args, { db, user }) {
+    return Saving.sendSaving(db, user, args);
+  },
+});

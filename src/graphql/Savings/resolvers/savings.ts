@@ -12,7 +12,6 @@ export async function savingsResolver(db, user) {
       name: true,
       value: true,
       goal: true,
-      fee: true,
       type: true,
     },
   });
