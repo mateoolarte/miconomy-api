@@ -1,6 +1,53 @@
 {
   "name": "miconomy-api",
-  "version": "1.0.0",
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": { "warnOnly": true }
+      }
+    },
+    "testEnvironment": "node"
+  },
+  "babel": {
+    "presets": [
+      ["@babel/preset-env", { "targets": { "node": "current" } }],
+      "@babel/preset-typescript"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": false,
+      "node": true,
+      "es6": true,
+      "commonjs": true,
+      "jest": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint",
+    "*.{js,ts,json,md}": "prettier --write"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app",
