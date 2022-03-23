@@ -160,6 +160,7 @@ export interface NexusGenFieldTypes {
     createSaving: NexusGenRootTypes['Saving']; // Saving!
     createSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
     deleteCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
+    deleteExpense: NexusGenRootTypes['Expense']; // Expense!
     deleteSaving: NexusGenRootTypes['Saving']; // Saving!
     deleteSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -168,6 +169,8 @@ export interface NexusGenFieldTypes {
     updateBudget: NexusGenRootTypes['Budget']; // Budget!
     updateCategory: NexusGenRootTypes['Category']; // Category!
     updateCategoryBudget: NexusGenRootTypes['CategoryBudget']; // CategoryBudget!
+    updateCategoryEntry: NexusGenRootTypes['CategoryEntry']; // CategoryEntry!
+    updateExpense: NexusGenRootTypes['Expense']; // Expense!
     updateSaving: NexusGenRootTypes['Saving']; // Saving!
     updateSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
   }
@@ -176,6 +179,7 @@ export interface NexusGenFieldTypes {
     budgets: NexusGenRootTypes['Budget'][] | null; // [Budget!]
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
     entry: NexusGenRootTypes['Entry']; // Entry!
+    entryCategory: NexusGenRootTypes['CategoryEntry']; // CategoryEntry!
     savings: NexusGenRootTypes['Saving'][] | null; // [Saving!]
   }
   Saving: { // field return type
@@ -258,6 +262,7 @@ export interface NexusGenFieldTypeNames {
     createSaving: 'Saving'
     createSavingBudget: 'SavingBudget'
     deleteCategoryBudget: 'CategoryBudget'
+    deleteExpense: 'Expense'
     deleteSaving: 'Saving'
     deleteSavingBudget: 'SavingBudget'
     login: 'AuthPayload'
@@ -266,6 +271,8 @@ export interface NexusGenFieldTypeNames {
     updateBudget: 'Budget'
     updateCategory: 'Category'
     updateCategoryBudget: 'CategoryBudget'
+    updateCategoryEntry: 'CategoryEntry'
+    updateExpense: 'Expense'
     updateSaving: 'Saving'
     updateSavingBudget: 'SavingBudget'
   }
@@ -274,6 +281,7 @@ export interface NexusGenFieldTypeNames {
     budgets: 'Budget'
     categories: 'Category'
     entry: 'Entry'
+    entryCategory: 'CategoryEntry'
     savings: 'Saving'
   }
   Saving: { // field return type name
@@ -353,6 +361,9 @@ export interface NexusGenArgTypes {
       budgetId: number; // Int!
       categoryId: number; // Int!
     }
+    deleteExpense: { // args
+      id: number; // Int!
+    }
     deleteSaving: { // args
       id: number; // Int!
     }
@@ -386,6 +397,16 @@ export interface NexusGenArgTypes {
       budgetId: number; // Int!
       categoryId: number; // Int!
     }
+    updateCategoryEntry: { // args
+      amount: number; // Int!
+      categoryId: number; // Int!
+      entryId: number; // Int!
+    }
+    updateExpense: { // args
+      description: string; // String!
+      id: number; // Int!
+      value: number; // Int!
+    }
     updateSaving: { // args
       goal: number; // Int!
       id: number; // Int!
@@ -405,6 +426,10 @@ export interface NexusGenArgTypes {
     entry: { // args
       month: number; // Int!
       year: number; // Int!
+    }
+    entryCategory: { // args
+      categoryId: number; // Int!
+      entryId: number; // Int!
     }
   }
 }

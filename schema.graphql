@@ -61,6 +61,7 @@ type Mutation {
   createSaving(goal: Int!, name: String!, type: String, value: Int): Saving!
   createSavingBudget(budgetId: Int!, fee: Int!, savingId: Int!): SavingBudget!
   deleteCategoryBudget(budgetId: Int!, categoryId: Int!): CategoryBudget!
+  deleteExpense(id: Int!): Expense!
   deleteSaving(id: Int!): Saving!
   deleteSavingBudget(budgetId: Int!, savingId: Int!): SavingBudget!
   login(email: String!, password: String!): AuthPayload!
@@ -69,6 +70,8 @@ type Mutation {
   updateBudget(id: Int!, name: String!): Budget!
   updateCategory(id: Int!, name: String!): Category!
   updateCategoryBudget(amount: Int!, budgetId: Int!, categoryId: Int!): CategoryBudget!
+  updateCategoryEntry(amount: Int!, categoryId: Int!, entryId: Int!): CategoryEntry!
+  updateExpense(description: String!, id: Int!, value: Int!): Expense!
   updateSaving(goal: Int!, id: Int!, name: String!, value: Int!): Saving!
   updateSavingBudget(budgetId: Int!, fee: Int!, savingId: Int!): SavingBudget!
 }
@@ -78,6 +81,7 @@ type Query {
   budgets: [Budget!]
   categories: [Category!]
   entry(month: Int!, year: Int!): Entry!
+  entryCategory(categoryId: Int!, entryId: Int!): CategoryEntry!
   savings: [Saving!]
 }
 
