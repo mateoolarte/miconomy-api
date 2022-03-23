@@ -7,6 +7,11 @@ type AuthPayload {
   user: User
 }
 
+type Balance {
+  expenses: [Expense]
+  incomes: [Income]
+}
+
 type Budget {
   categories: [CategoryBudget]
   id: Int
@@ -77,6 +82,7 @@ type Mutation {
 }
 
 type Query {
+  balance(entryId: Int!): Balance!
   budget(id: Int!): Budget!
   budgets: [Budget!]
   categories: [Category!]

@@ -32,6 +32,10 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Balance: { // root type
+    expenses?: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    incomes?: Array<NexusGenRootTypes['Income'] | null> | null; // [Income]
+  }
   Budget: { // root type
     categories?: Array<NexusGenRootTypes['CategoryBudget'] | null> | null; // [CategoryBudget]
     id?: number | null; // Int
@@ -113,6 +117,10 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Balance: { // field return type
+    expenses: Array<NexusGenRootTypes['Expense'] | null> | null; // [Expense]
+    incomes: Array<NexusGenRootTypes['Income'] | null> | null; // [Income]
+  }
   Budget: { // field return type
     categories: Array<NexusGenRootTypes['CategoryBudget'] | null> | null; // [CategoryBudget]
     id: number | null; // Int
@@ -175,6 +183,7 @@ export interface NexusGenFieldTypes {
     updateSavingBudget: NexusGenRootTypes['SavingBudget']; // SavingBudget!
   }
   Query: { // field return type
+    balance: NexusGenRootTypes['Balance']; // Balance!
     budget: NexusGenRootTypes['Budget']; // Budget!
     budgets: NexusGenRootTypes['Budget'][] | null; // [Budget!]
     categories: NexusGenRootTypes['Category'][] | null; // [Category!]
@@ -214,6 +223,10 @@ export interface NexusGenFieldTypeNames {
   AuthPayload: { // field return type name
     token: 'String'
     user: 'User'
+  }
+  Balance: { // field return type name
+    expenses: 'Expense'
+    incomes: 'Income'
   }
   Budget: { // field return type name
     categories: 'CategoryBudget'
@@ -277,6 +290,7 @@ export interface NexusGenFieldTypeNames {
     updateSavingBudget: 'SavingBudget'
   }
   Query: { // field return type name
+    balance: 'Balance'
     budget: 'Budget'
     budgets: 'Budget'
     categories: 'Category'
@@ -420,6 +434,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    balance: { // args
+      entryId: number; // Int!
+    }
     budget: { // args
       id: number; // Int!
     }
