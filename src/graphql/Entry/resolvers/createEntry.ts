@@ -19,6 +19,7 @@ export async function createEntryResolver(db, user, args) {
     where: {
       monthId: monthId?.id,
       yearId: yearId?.id,
+      userId: user?.userId,
     },
   });
 
