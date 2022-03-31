@@ -68,7 +68,7 @@
     "pretty": "yarn fmt && yarn lint"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 17"
   },
   "dependencies": {
     "@prisma/client": "^3.11.1",
