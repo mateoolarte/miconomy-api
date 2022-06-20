@@ -2,6 +2,6 @@
 DATABASE_URL="postgres://username:password@localhost:5432/miconomy"
 
 # Production
-# DATABASE_URL="postgres://qgjbrfvzfivbcd:87c6e4257bcff72bc906420142e776c3de223af5548191a501126706d53483f0@ec2-52-22-135-159.compute-1.amazonaws.com:5432/detmjpj9c7jc7a"
+# DATABASE_URL=REVIEW_DATABASE_MANAGEMENT_APP
 
 APP_SECRET="my-secret"
