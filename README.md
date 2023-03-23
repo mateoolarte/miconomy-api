@@ -1,4 +1,8 @@
-# Miconomy API
+# Miconomy API (DEPRECATED)
+
+You can find the whole api integration inside this [repo](https://github.com/mateoolarte/miconomy)
+
+----------
 
 Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 
