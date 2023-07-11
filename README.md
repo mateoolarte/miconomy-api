@@ -23,46 +23,46 @@ Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 
 ## Prerequisites
 
-- PNPM
+- Yarn
 - Latest NodeJS LTS version
 
 ## Installation
 
 - Clone this repo
-- Run on terminal `pnpm` to install dependencies
+- Run on terminal `yarn` to install dependencies
 - Copy the content from `.env.example` and update the corresponding values
-- Run on terminal `pnpm dev` and start building
+- Run on terminal `yarn dev` and start building
 
 ## Available commands
 
 ### Run development server
 
 ```bash
-pnpm dev
+yarn dev
 ```
 
 ### Generate production server
 
 ```bash
-pnpm build
+yarn build
 ```
 
 ### Run a production server
 
 ```bash
-pnpm start
+yarn start
 ```
 
 ### Run a GUI app to manage database models
 
 ```bash
-pnpm studio
+yarn studio
 ```
 
 ### Sync migrations for development server
 
 ```bash
-pnpm migrate:dev
+yarn migrate:dev
 ```
 
 **Note:** You should ensure to have the right credentials for the database on `.env` file.
@@ -70,7 +70,7 @@ pnpm migrate:dev
 ### Create migrations for development server
 
 ```bash
-pnpm migrate:dev --name NAME_OF_MIGRATION
+yarn migrate:dev --name NAME_OF_MIGRATION
 ```
 
 **Note:** You should ensure to have the right credentials for the database on `.env` file.
@@ -80,59 +80,59 @@ pnpm migrate:dev --name NAME_OF_MIGRATION
 In this case, before run this command we should un/comment on the `.env` the right DB provider env
 
 ```bash
-pnpm migrate
+yarn migrate
 ```
 
 ### Sync and generate prisma client from schema.prisma file
 
 ```bash
-pnpm generate:prisma
+yarn generate:prisma
 ```
 
 ### Sync and generate nexus typings from schema.ts file
 
 ```bash
-pnpm generate:nexus
+yarn generate:nexus
 ```
 
 ### Sync and generate prisma client and nexus typings code
 
 ```bash
-pnpm generate
+yarn generate
 ```
 
 ### Clean production folder
 
 ```bash
-pnpm clean
+yarn clean
 ```
 
 ### Run tests
 
 ```bash
-pnpm test
+yarn test
 ```
 
 ### Run watching tests
 
 ```bash
-pnpm test:watch
+yarn test:watch
 ```
 
 ### Run linter on js and ts files
 
 ```bash
-pnpm lint
+yarn lint
 ```
 
 ### Run formatter on src folder
 
 ```bash
-pnpm fmt
+yarn fmt
 ```
 
 ### Run formatter and linter
 
 ```bash
-pnpm pretty
+yarn pretty
 ```
