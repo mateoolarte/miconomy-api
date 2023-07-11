@@ -8,7 +8,7 @@ Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 - Nexus: Code-first library to generate schema for GraphQL servers
 - Prisma: Next generation of ORM to work with DB
 - Postgres: Database provider
-- Heroku: Platform as a Service to deploy
+- Railway: Platform as a Service to deploy
 - Typescript: Programming language with typings
 - Jest: Test runner
 - Git hooks with Husky and Linted staged: To help checking test and formatters before a commit
