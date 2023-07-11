@@ -1,8 +1,4 @@
-# Miconomy API (DEPRECATED)
-
-You can find the whole api integration inside this [repo](https://github.com/mateoolarte/miconomy)
-
-----------
+# Miconomy API
 
 Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 
@@ -27,46 +23,46 @@ Here you can find the backend api. Built with Nodejs, GraphQL and Prisma ORM.
 
 ## Prerequisites
 
-- Yarn
-- NodeJS >= 16
+- PNPM
+- Latest NodeJS LTS version
 
 ## Installation
 
 - Clone this repo
-- Run on terminal `yarn` to install dependencies
-- Create a `.env` file and ask a teammate to share the content
-- Run on terminal `yarn dev` and start rocking
+- Run on terminal `pnpm` to install dependencies
+- Copy the content from `.env.example` and update the corresponding values
+- Run on terminal `pnpm dev` and start building
 
 ## Available commands
 
 ### Run development server
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 ### Generate production server
 
 ```bash
-yarn build
+pnpm build
 ```
 
 ### Run a production server
 
 ```bash
-yarn start
+pnpm start
 ```
 
 ### Run a GUI app to manage database models
 
 ```bash
-yarn studio
+pnpm studio
 ```
 
 ### Sync migrations for development server
 
 ```bash
-yarn migrate:dev
+pnpm migrate:dev
 ```
 
 **Note:** You should ensure to have the right credentials for the database on `.env` file.
@@ -74,7 +70,7 @@ yarn migrate:dev
 ### Create migrations for development server
 
 ```bash
-yarn migrate:dev --name NAME_OF_MIGRATION
+pnpm migrate:dev --name NAME_OF_MIGRATION
 ```
 
 **Note:** You should ensure to have the right credentials for the database on `.env` file.
@@ -84,59 +80,59 @@ yarn migrate:dev --name NAME_OF_MIGRATION
 In this case, before run this command we should un/comment on the `.env` the right DB provider env
 
 ```bash
-yarn migrate
+pnpm migrate
 ```
 
 ### Sync and generate prisma client from schema.prisma file
 
 ```bash
-yarn generate:prisma
+pnpm generate:prisma
 ```
 
 ### Sync and generate nexus typings from schema.ts file
 
 ```bash
-yarn generate:nexus
+pnpm generate:nexus
 ```
 
 ### Sync and generate prisma client and nexus typings code
 
 ```bash
-yarn generate
+pnpm generate
 ```
 
 ### Clean production folder
 
 ```bash
-yarn clean
+pnpm clean
 ```
 
 ### Run tests
 
 ```bash
-yarn test
+pnpm test
 ```
 
 ### Run watching tests
 
 ```bash
-yarn test:watch
+pnpm test:watch
 ```
 
 ### Run linter on js and ts files
 
 ```bash
-yarn lint
+pnpm lint
 ```
 
 ### Run formatter on src folder
 
 ```bash
-yarn fmt
+pnpm fmt
 ```
 
 ### Run formatter and linter
 
 ```bash
-yarn pretty
+pnpm pretty
 ```

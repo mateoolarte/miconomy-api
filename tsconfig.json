@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "esnext",
     "lib": ["esnext"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -11,10 +11,5 @@
     "outDir": "dist"
   },
   "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "src/libs/generated/nexus.ts",
-    "tests",
-    "src/**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "src/libs/generated/nexus.ts", "src/**/*.test.ts"]
 }

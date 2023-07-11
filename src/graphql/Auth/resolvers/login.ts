@@ -1,6 +1,7 @@
-import { UserInputError } from 'apollo-server';
-import bcrypt from 'bcrypt';
-import { generateToken } from '../../../utils/generateToken';
+import bcrypt from "bcrypt";
+
+import { generateToken } from "../../../utils/generateToken";
+import { throwError } from "../../../utils/throwError";
 
 export async function loginResolver(args, db) {
   const { email, password } = args;
@@ -8,16 +9,20 @@ export async function loginResolver(args, db) {
   const user = await db.user.findUnique({ where: { email } });
 
   if (!user) {
-    throw new UserInputError('Este usuario no existe');
+    throwError("Este usuario no existe", {
+      code: "BAD_USER_INPUT",
+    });
   }
 
   const hasValidPassword = await bcrypt.compare(password, user.password);
 
   if (!hasValidPassword) {
-    throw new UserInputError('Valida tu usuario o contraseña');
+    throwError("Valida tu usuario o contraseña", {
+      code: "BAD_USER_INPUT",
+    });
   }
 
-  const token = generateToken({ userId: user.id }, '30 days');
+  const token = generateToken({ userId: user.id }, "30 days");
 
   return {
     user,

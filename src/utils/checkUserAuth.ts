@@ -1,5 +1,9 @@
-import { AuthenticationError } from 'apollo-server';
+import { throwError } from "./throwError";
 
 export function checkUserAuth(user) {
-  if (!user) throw new AuthenticationError('No has iniciado sesión');
+  if (!user) {
+    throwError("No has iniciado sesión", {
+      code: "UNAUTHENTICATED",
+    });
+  }
 }

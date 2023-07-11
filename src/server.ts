@@ -1,8 +1,5 @@
-import { ApolloServer } from 'apollo-server';
-import { createContext } from './config/context';
-import { schema } from './graphql/schema';
+import { ApolloServer } from "@apollo/server";
 
-export const server = new ApolloServer({
-  schema,
-  context: ({ req }) => createContext(req),
-});
+import { schema } from "./graphql/schema";
+
+export const server = new ApolloServer({ schema });

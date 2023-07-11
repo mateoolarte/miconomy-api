@@ -1,10 +1,6 @@
-.husky
-
 coverage
 dist
 node_modules
-prisma/migrations
-prisma/schema.prisma
 src/libs/generated/**
 
 package-lock.json

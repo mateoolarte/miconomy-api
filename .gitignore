@@ -9,9 +9,10 @@
 
 # misc
 .DS_Store
-*.env*
+.env
 .eslintcache
 package-lock.json
+yarn.lock
 
 # debug
 npm-debug.log*

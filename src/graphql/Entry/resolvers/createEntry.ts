@@ -1,11 +1,10 @@
-import { UserInputError } from 'apollo-server';
+import { parseBudgetCategories } from "../../shared/utils/parseBudgetCategories";
+import { parseBudgetSavings } from "../../shared/utils/parseBudgetSavings";
 
-import { checkUserAuth } from '../../../utils/checkUserAuth';
-
-import { getMonth } from '../utils/getMonth';
-import { getYear } from '../utils/getYear';
-import { parseBudgetCategories } from '../../shared/utils/parseBudgetCategories';
-import { parseBudgetSavings } from '../../shared/utils/parseBudgetSavings';
+import { checkUserAuth } from "../../../utils/checkUserAuth";
+import { throwError } from "../../../utils/throwError";
+import { getMonth } from "../utils/getMonth";
+import { getYear } from "../utils/getYear";
 
 export async function createEntryResolver(db, user, args) {
   checkUserAuth(user);
@@ -24,7 +23,9 @@ export async function createEntryResolver(db, user, args) {
   });
 
   if (searchEntryExist) {
-    throw new UserInputError('Ya tienes creado este mes');
+    throwError("Ya tienes creado este mes", {
+      code: "BAD_USER_INPUT",
+    });
   }
 
   const entry = await db.entry.create({
@@ -46,10 +47,10 @@ export async function createEntryResolver(db, user, args) {
   const getCategories = getBudget.categories;
   const getSavings = getBudget.savings;
   const categories = await Promise.all(
-    getCategories.map(async (item) => await parseBudgetCategories(item, db))
+    getCategories.map(async (item) => await parseBudgetCategories(item, db)),
   );
   const savings = await Promise.all(
-    getSavings.map(async (item) => await parseBudgetSavings(item, db))
+    getSavings.map(async (item) => await parseBudgetSavings(item, db)),
   );
   const parseEntryCategories = categories.map((item) => {
     return {

@@ -1,10 +1,6 @@
-.husky
-
 coverage
 dist
-node_modules
-prisma/migrations
-prisma/schema.prisma
+node_module
 src/libs/generated/**
 
 package.json

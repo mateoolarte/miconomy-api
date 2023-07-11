@@ -1,7 +1,16 @@
-import { server } from './server';
+import { startStandaloneServer } from "@apollo/server/standalone";
 
-const PORT = process.env.PORT || 4000;
+import { server } from "./server";
+import { createContext } from "./config/context";
 
-server.listen({ port: PORT }).then(({ url }) => {
+async function runServer() {
+  const port = Number(process.env.PORT) || 4000;
+  const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => createContext(req),
+    listen: { port },
+  });
+
   console.log(`🚀 Server ready at ${url}`);
-});
+}
+
+runServer();

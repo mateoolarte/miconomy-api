@@ -1,6 +1,7 @@
-import { UserInputError } from 'apollo-server';
-import bcrypt from 'bcrypt';
-import { generateToken } from '../../../utils/generateToken';
+import bcrypt from "bcrypt";
+
+import { generateToken } from "../../../utils/generateToken";
+import { throwError } from "../../../utils/throwError";
 
 export async function signupResolver(args, db) {
   const { email, password } = args;
@@ -8,13 +9,15 @@ export async function signupResolver(args, db) {
   const userExist = await db.user.findUnique({ where: { email } });
 
   if (userExist) {
-    throw new UserInputError('Este usuario ya existe');
+    throwError("Este usuario ya existe", {
+      code: "BAD_USER_INPUT",
+    });
   }
 
   if (password.length < 8) {
-    throw new UserInputError(
-      'La contraseña debe ser mayor o igual a 8 caracteres'
-    );
+    throwError("La contraseña debe ser mayor o igual a 8 caracteres", {
+      code: "BAD_USER_INPUT",
+    });
   }
 
   const encryptedPass = await bcrypt.hash(password, 10);
@@ -24,7 +27,7 @@ export async function signupResolver(args, db) {
       password: encryptedPass,
     },
   });
-  const token = generateToken({ userId: user.id }, '30 days');
+  const token = generateToken({ userId: user.id }, "30 days");
 
   return {
     user,
